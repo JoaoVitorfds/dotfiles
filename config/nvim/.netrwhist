@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =8
+let g:netrw_dirhist_8='/home/joao/Documentos/estudos/linguistica/hb000003/atividades'
+let g:netrw_dirhist_7='/home/joao/Documentos'
+let g:netrw_dirhist_6='/home/joao/.config/compton'
+let g:netrw_dirhist_5='/usr/share/nvim/runtime/plugin'
+let g:netrw_dirhist_4='/usr/share/nvim/runtime'
+let g:netrw_dirhist_3='/usr/share/nvim/runtime/autoload'
+let g:netrw_dirhist_2='/usr/share/nvim/runtime/autoload/xml'
+let g:netrw_dirhist_1='/usr/share/nvim/runtime/autoload'
+let g:netrw_dirhist_0='/usr/share/nvim/runtime/autoload/remote'
+let g:netrw_dirhist_9='/usr/share/nvim/runtime/autoload'

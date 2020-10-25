@@ -1,0 +1,346 @@
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+;;
+;;	    ____        __      __              
+;;	   / __ \____  / /_  __/ /_  ____ ______
+;;	  / /_/ / __ \/ / / / / __ \/ __ `/ ___/
+;;	 / ____/ /_/ / / /_/ / /_/ / /_/ / /    
+;;	/_/    \____/_/\__, /_.___/\__,_/_/     
+;;	              /____/                    
+;;
+;; Created By Aditya Shakya @adi1090x
+;;
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+[color]
+
+bg = #2e3440
+bg-alt = #5e81ac
+fg = #d8dee9
+fg-alt = #888888
+
+acolor = #FFFFFF
+curgent = #EF5350
+coccupied = #42A5F5
+
+#shade1 = #311B92
+#shade2 = #4527A0
+#shade3 = #512DA8
+#shade4 = #5E35B1
+#shade5 = #673AB7
+#shade6 = #7E57C2
+#shade7 = #9575CD
+#shade8 = #B39DDB
+#txt = #2C2C2C
+
+## Material Colors
+
+red = #e53935
+pink = #d81b60
+purple = #8e24aa
+deep-purple = #5e35b1
+indigo = #3949ab
+blue = #1e88e5
+light-blue = #039be5
+cyan = #00acc1
+teal = #00897b
+green = #43a047
+light-green = #7cb342
+lime = #c0ca33
+yellow = #fdd835
+amber = #ffb300
+orange = #fb8c00
+deep-orange = #f4511e
+brown = #6d4c41
+grey = #757575
+blue-gray = #546e7a
+
+;==========================================================
+
+[bar/main]
+width = 100%
+height = 24
+bottom = false
+fixed-center = true
+line-size = 2
+
+background = ${color.bg}
+foreground = ${color.fg}
+
+wm-restack = bspwm
+enable-ipc = true
+
+tray-position = right
+tray-background = ${color.bg-alt}
+;==========================================================
+
+font-0 = "Fantasque Sans Mono:pixelsize=10;3"
+font-1 = "Iosevka Nerd Font:pixelsize=13;3"
+font-2 = "Fantasque Sans Mono:bold:pixelsize=10;3"
+font-3 = "Iosevka Nerd Font:pixelsize=11;3"
+font-4 = "Font Awesome 5 Free Regular:pixelsize=7"
+
+;==========================================================
+cursor-click = pointer
+
+scroll-up = i3wm-wsnext
+scroll-down = i3wm-wsprev
+
+;== Module Location ========================================================
+
+modules-left = bspwm title
+modules-center = spotify mpd
+modules-right = volume separator memory separator date2 time
+ 
+;== Modules ========================================================
+
+[module/i3]
+type = internal/i3
+
+format-margin = 1
+
+label-focused = %name%
+label-focused-background = ${color.bg-alt}
+label-focused-foreground = ${color.fg}
+label-focused-padding = 1
+
+label-unfocused = %name%
+label-unfocused-foreground = ${color.fg}
+label-unfocused-padding = 1
+
+[module/bspwm]
+type = internal/bspwm
+
+label-focused = %name%
+label-focused-background = ${color.bg-alt}
+label-focused-foreground = ${color.fg}
+label-focused-padding = 1
+label-focused-font = 3
+
+label-occupied = %name%
+label-occupied-padding = 1
+label-occupied-foreground = ${color.fg}
+label-occupied-font = 3
+
+label-urgent = %name%!
+label-urgent-background = ${color.bg-alt}
+label-urgent-underline = ${color.bg-alt}
+label-urgent-padding = 1
+label-urgent-font = 3
+
+label-empty = %name%
+label-empty-foreground = ${color.fg-alt}
+label-empty-padding = 1
+label-empty-font = 3
+
+; Separator in between workspaces
+;label-separator = |
+
+[module/menu]
+type = custom/text
+content = 
+;alt icons = 
+content-padding = 1
+content-background = ${color.bg-alt}
+content-foreground = ${color.fg}
+click-left = ~/.config/rofi/launchers/appsmenu.sh
+
+[module/workspaces]
+type = internal/xworkspaces
+
+pin-workspaces = true
+
+enable-click = true
+enable-scroll = true
+
+format = <label-state>
+format-padding = 0
+
+label-monitor = %name%
+
+label-active = %name%
+label-active-font = 3
+label-active-foreground = ${color.fg}
+label-active-background = ${color.bg-alt}
+
+label-occupied = %icon%
+label-occupied-font = 3
+label-occupied-underline = ${color.fg}
+
+label-urgent = %icon%
+label-urgent-font = 3
+label-urgent-foreground = ${color.fg-alt}
+label-urgent-background = ${color.bg-alt}
+
+label-empty = %name%
+label-empty-font = 3
+label-empty-background = ${color.bg}
+label-empty-foreground = ${color.fg}
+
+label-active-padding = 1
+label-urgent-padding = 1
+label-occupied-padding = 1
+label-empty-padding = 1
+
+[module/title]
+type = internal/xwindow
+format = "<label>"
+
+label-margin = 1
+label = %title%
+label-maxlen = 50
+
+;==========================================================
+
+[module/spotify]
+type = custom/script
+exec = ~/.config/polybar/scripts/spotify.sh
+interval = 10
+
+format = <label>
+format-foreground = #1db954
+format-margin = 2
+
+label =  %output%
+
+click-left = dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+click-middle = killall spotify
+click-right = bspc desktop -f 5
+
+[module/mpd]
+type = internal/mpd
+format-online = <label-time>  <label-song>   <icon-prev> <toggle> <icon-next>
+
+label-song-maxlen = 50
+label-song-ellipsis = true
+
+icon-play = 奈
+icon-pause = 
+icon-stop = 栗
+icon-prev = 玲
+icon-next = 怜
+icon-seekb = «
+icon-seekf = »
+icon-random = 
+icon-repeat = 凌
+icon-repeatone = 🔂
+icon-single = 🔂
+icon-consume = ✀
+
+;==========================================================
+
+[module/separator]
+type = custom/text
+content = |
+content-padding = 1
+
+[module/mic]
+type = custom/ipc
+hook-0 = ~/.config/polybar/scripts/mic
+
+click-left = $HOME/scripts/mictoggle
+
+initial = 1
+
+[module/record]
+type = custom/ipc
+
+hook-0 = cat ~/.cache/recordingicon
+
+format-foreground = #FF5555
+
+initial = 1
+
+[module/dnf]
+type = custom/ipc
+
+hook-0 = cat ~/.cache/dnf-updates
+
+format-prefix = " "
+
+click-left = dnf-click &
+
+initial = 1
+
+[module/mail]
+type = custom/script
+exec = ~/scripts/mailbox.sh
+interval = 600
+
+format = <label>
+
+label =  %output%
+
+click-left = kitty -e neomutt &
+
+[module/memory]
+type = internal/memory
+interval = 3
+
+format = <label>
+label-padding = 0
+
+label =  %gb_used%/%gb_total%
+
+[module/volume]
+type = internal/pulseaudio
+format-volume = <ramp-volume> <label-volume>
+format-volume-padding = 0
+format-volume-background = ${color.bg}
+label-volume = %percentage%%
+label-muted = "婢 MUTED"
+label-muted-background = ${color.bg}
+label-muted-padding = 0
+
+ramp-volume-0 = 奄
+ramp-volume-1 = 奄
+ramp-volume-2 = 奔
+ramp-volume-3 = 奔
+ramp-volume-4 = 墳
+ramp-volume-5 = 墳
+ramp-volume-6 = 墳
+
+[module/network]
+type = custom/script
+exec = ~/.config/polybar/check-network
+format-background = ${color.bg}
+format-padding = 0
+click-left = networkmanager_dmenu &
+click-right = networkmanager_dmenu &
+tail = true
+
+[module/date]
+type = internal/date
+interval = 30
+label =  %time%
+label-padding = 0
+label-background = ${color.bg}
+time = " %Y/%m/%d  %I:%M %p "
+
+[module/date2]
+type = custom/script
+exec = date +%a,\ %b\ %e
+interval = 30
+
+label = "%output% "
+format-prefix = " "  
+
+click-left = kitty -e calcurse &
+click-right = $HOME/scripts/appointments
+
+[module/time]
+type = custom/script
+exec = date +%H:%M
+interval = 30
+
+label = "%output% "
+format-prefix = " "
+
+[module/powermenu]
+type = custom/text
+content =襤
+content-padding = 1
+content-background = ${color.bg}
+content-foreground = #ff5555
+click-left = ~/.config/rofi/launchers/powermenu.sh
+
+;== EOF ========================================================

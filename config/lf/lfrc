@@ -1,0 +1,158 @@
+# Luke's lf settings
+
+# Basic vars
+set shell bash
+set shellopts '-eu'
+set ifs "\n"
+set scrolloff 10
+set color256 true
+set icons
+set drawbox
+set period 1
+#set hiddenfiles ".*:*.aux:*.log:*.bbl:*.bcf:*.blg:*.run.xml"
+
+# Vars that depend on environmental variables
+$lf -remote "send $id set previewer ${XDG_CONFIG_HOME:-$HOME/.config}/lf/scope"
+
+# cmds/functions
+cmd open ${{
+    case $(file --mime-type $f -b) in
+        text/*) $EDITOR $fx;;
+	image/x-xcf|image/svg+xml) setsid -f gimp $f >/dev/null 2>&1 ;;
+	image/*) rotdir $f | grep -i "\.\(png\|jpg\|jpeg\|gif\|webp\|tif\)\(_large\)*$" | sxiv -aio 2>/dev/null | lf-select ;;
+	audio/*) setsid -f mpv --audio-display=attachment $f >/dev/null 2>&1;;
+	video/*) setsid -f mpv $f -quiet >/dev/null 2>&1 ;;
+	application/pdf|application/vnd*|application/epub*) setsid -f zathura $fx >/dev/null 2>&1 ;;
+        *) for f in $fx; do setsid -f $OPENER $f >/dev/null 2>&1; done;;
+    esac
+}}
+
+cmd mkdir $mkdir -p "$(echo $* | tr ' ' '\ ')"
+
+cmd delete ${{
+	clear; tput cup $(($(tput lines)/3)); tput bold
+	set -f
+	printf "%s\n\t" "$fx"
+	printf "delete?[y/N]"
+	read ans
+	[ $ans = "y" ] && rm -rf $fx
+}}
+
+# cmd moveto ${{
+# 	clear; tput cup $(($(tput lines)/3)); tput bold
+# 	set -f
+# 	clear; echo "Move to where?"
+# 	dest="$(cut -d'	' -f2- ${XDG_CONFIG_HOME:-$HOME/.config}/directories | fzf | sed 's|~|$HOME|' )" &&
+# 	for x in $fx; do
+# 		eval mv -iv \"$x\" \"$dest\"
+# 	done &&
+# 	notify-send "🚚 File(s) moved." "File(s) moved to $dest."
+# }}
+# 
+# cmd copyto ${{
+# 	clear; tput cup $(($(tput lines)/3)); tput bold
+# 	set -f
+# 	clear; echo "Copy to where?"
+# 	dest="$(cut -d'	' -f2- ${XDG_CONFIG_HOME:-$HOME/.config}/directories | fzf | sed 's|~|$HOME|' )" &&
+# 	for x in $fx; do
+# 		eval cp -ivr \"$x\" \"$dest\"
+# 	done &&
+# 	notify-send "📋 File(s) copied." "File(s) copies to $dest."
+# }}
+
+# Archive bindings
+cmd unarchive ${{
+  case "$f" in
+      *.zip) unzip "$f" ;;
+      *.tar.gz) tar -xzvf "$f" ;;
+      *.tar.bz2) tar -xjvf "$f" ;;
+      *.tar) tar -xvf "$f" ;;
+      *) echo "Unsupported format" ;;
+  esac
+}}
+
+cmd zip %zip -r "$f" "$f"
+cmd tar %tar cvf "$f.tar" "$f"
+cmd targz %tar cvzf "$f.tar.gz" "$f"
+cmd tarbz2 %tar cjvf "$f.tar.bz2" "$f"
+
+cmd setbg "$1"
+cmd bulkrename $vidir
+
+# Bindings
+map <c-f> $lf -remote "send $id select '$(fzf)'"
+map J $lf -remote "send $id cd $(cut -d'	' -f2 ${XDG_CONFIG_HOME:-$HOME/.config}/directories | fzf)"
+map gh
+map gg top
+map DD delete
+map <esc> clear
+map y copy
+map m cut
+map p paste
+map . set hidden!
+map <c-n> push :mkdir<space>
+map <c-r> reload
+map <enter> shell
+map x $$f
+map X !$f
+map o &mimeopen $f
+map O $mimeopen --ask $f
+
+map A rename # at the very end
+map c push A<c-u> # new rename
+map I push A<c-a> # at the very beginning
+map i push A<a-b><a-b><a-f> # before extention
+map a push A<a-b> # after extention
+map B bulkrename
+map b $setbg $f
+
+map <c-e> down
+map <c-y> up
+map V push :!nvim<space>
+
+# Archive Mappings
+map zz zip
+map zt tar
+map zg targz
+map zb targz
+map zu unarchive
+
+# Movement
+
+map gh cd /home/joao
+map gtr cd ~/.local/share/Trash/files
+
+map gv. cd ~/Vídeos
+
+map gm. cd ~/Música
+
+map gi. cd ~/Imagens
+map gis cd ~/Imagens/screenshots
+map giw cd ~/Imagens/wallpapers
+
+map ge cd ~/Documentos/estudos
+map gl. cd ~/Documentos/estudos/linguistica
+map glc cd ~/Documentos/estudos/linguistica/lc
+map gle cd ~/Documentos/estudos/linguistica/estruturalismo
+map glg cd ~/Documentos/estudos/linguistica/gerativismo
+map glp cd ~/Documentos/estudos/linguistica/psicolinguistica
+map glso cd ~/Documentos/estudos/linguistica/semiotica
+map glsa cd ~/Documentos/estudos/linguistica/semantica
+map gL. cd ~/Documentos/estudos/literatura
+map gLa cd ~/Documentos/estudos/literatura/africana
+map gLb cd ~/Documentos/estudos/literatura/brasileira
+map gLp cd ~/Documentos/estudos/literatura/portuguesa
+map glog cd ~/Documentos/estudos/logica
+
+map gtx cd ~/Documentos/tex/
+
+map gd cd ~/Documentos
+
+map gD cd ~/Downloads
+
+map gpy cd ~/Documentos/estudos/linguistica/computacional/python
+
+map gC cd ~/.config
+map gE cd /etc
+map gU. cd /usr
+map gUs cd /usr/share 
