@@ -1,0 +1,26 @@
+#!/bin/sh
+
+declare options=("logout
+reiniciar
+desligar
+cancel")
+
+choice=$(echo -e "${options[@]}" | dmenu -b -i -fn "FantasqueSansMono" -nb "#282a36" -sb "#bd93f9" -sf "#282a36" -p 'Escolha a opção desejada: ')
+
+case "$choice" in
+	cancel)
+		echo "Program terminated." && exit 1
+	;;
+	logout)
+		pkill dwm || bspc quit
+	;;
+	reiniciar)
+		reboot
+	;;
+	desligar)
+		shutdown -h now
+	;;
+	*)
+		exit 1
+	;;
+esac

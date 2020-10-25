@@ -1,0 +1,3 @@
+#!/bin/sh
+
+notify-send "Main Apps:" "» Browser: Ctrl + Alt + i" "» File Manager: Ctrl + Alt + f" "» Music Player (ncmpcpp): Ctrl + Alt + m;n"  "» Music Player (Spotify): Ctrl + Alt + m;s"  "» RSS Feeds: Ctrl + Alt + n"

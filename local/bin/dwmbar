@@ -1,0 +1,41 @@
+
+#!/bin/sh
+dte(){
+        dte="$(date +"%a, %b %d %R")"
+        echo "$dte"
+}
+
+hdd(){
+        hdd="$(df -h /home | grep dev | awk '{print$3, " "  $5}')"
+        echo "HDD: $hdd"
+}
+
+vol(){
+	vol="$(amixer -D pulse get Master | awk -F'[][]' 'END{print $4":"$2}')"
+	echo "Volume $vol"
+}
+
+kernel(){
+	kernel="$(uname -sr | sed "s/-amd64//g")"
+	echo $kernel
+}
+
+bat() {
+	battery="$(cat /sys/class/power_supply/BAT0/capacity)"
+	echo "$battery %"
+}
+
+batstat() {
+	bstat="$(cat /sys/class/power_supply/BAT0/status)"
+	echo "$bstat"
+}
+
+status(){
+	echo " $(dte) "
+}
+
+
+while true; do
+	xsetroot -name "$(status)"
+	sleep 30
+done

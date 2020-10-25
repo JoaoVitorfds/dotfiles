@@ -1,0 +1,5 @@
+#!/bin/sh
+
+var=$"($TERMINAL -e "fzf -i -e")"
+
+notify-send $var

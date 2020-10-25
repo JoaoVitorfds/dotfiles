@@ -1,0 +1,9 @@
+#!/bin/sh
+
+#link=${1}
+#tag1=${2:-}
+#tag2=${3:-}
+#tag3=${4:-}
+#
+#echo $1 $2 $3 $4 >> /home/joao/.config/newsboat/urls
+(( $# < 1 )) && >&2 echo "Not enough arguments" || echo $@ >> /home/joao/.config/newsboat/urls
