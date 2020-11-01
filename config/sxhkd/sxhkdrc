@@ -1,170 +1,32 @@
-#
-##
-## bspwm hotkeys
-## =============
-#
-## quit/restart bspwm
-#super + shift + e
-#	sh $HOME/.config/rofi/launchers/powermenub.sh
-#
-## restart bspwm
-#super + shift + Escape
-#	bspc wm -r
-#
-# close and kill
-#super + {_,shift + }q
-#	bspc node -{c,k}
-#
-## alternate between the tiled and monocle layout
-#super + m
-#	bspc desktop -l monocle
-#super + Right
-#	bspc node -f next.local
-#super + Left
-#	bspc node -f prev.local
-#
-## send the newest marked node to the newest preselected node
-#super + y
-#	bspc node newest.marked.local -n newest.!automatic.local
-#
-## send the focused window to last preselection
-#super + ctrl + o
-#	bspc node -n 'last.!automatic'
-#
-## swap the current node and the biggest node (.local ensures it is the same desktop)
-#super + g
-#	bspc node -s biggest.local
-#
-##
-## state/flags
-## ===========
-#
-## set the window state
-#super + {t,shift + t,s,f}
-#	bspc node -t {\~tiled,\~pseudo_tiled,\~floating,\~fullscreen}
-#
-## set the node flags
-#super + ctrl + {m,u,x,y,z}
-#	bspc node -g {marked,hidden,locked,sticky,private}
-#
-## unhide windows
-#super + shift + u
-#	bspc node $(bspc query -N -n .hidden | tail -n1) -g hidden=off
-#
-##
-## focus/swap
-## ==========
-#
-## focus the node in the given direction
-#super + {_,shift + }{h,j,k,l}
-#	bspc node -{f,s} {west,south,north,east}
-#
-## focus the node for the given path jump
-#super + {p,b,comma,period}
-#	bspc node -f @{parent,brother,first,second}
-#
-## focus the next/previous node in the current desktop
-#super + {_,shift + }c
-#	bspc node -f {next,prev}.local
-#
-## focus the next occupied desktop in the current monitor
-#super + bracketright
-#	bspc desktop -f next.local.occupied
-## focus the previous occupied desktop in the current monitor
-#super + bracketleft
-#	bspc desktop -f prev.local.occupied
-#
-## focus the last node/desktop
-#super + {grave,Tab}
-#	bspc {node,desktop} -f last
-#
-## focus the older or newer node in the focus history
-#super + {o,i}
-#	bspc wm -h off; \
-#	bspc node {older,newer} -f; \
-#	bspc wm -h on
-#
-## focus or send to the given desktop
-#super + {_,shift + }{1-9,0}
-#	bspc {desktop -f,node -d} '^{1-9,10}'
-#
-##
-## preselect
-## =========
-#
-## preselect the direction
-#super + ctrl + {h,j,k,l}
-#	bspc node -p {west,south,north,east}
-#
-## preselect the ratio
-#super + ctrl + {1-9}
-#	bspc node -o 0.{1-9}
-#
-## cancel the preselection for the focused node
-#super + ctrl + space
-#	bspc node -p cancel
-#
-## cancel the preselection for the focused desktop
-#super + ctrl + shift + space
-#	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
-#
-##
-## move/resize
-## ===========
-#
-## resize (press the left combination, then use hjkl to resize. Escape stops the resize
-##super + r : {h,j,k,l}
-##	bsp_resize {west,south,north,east} 50
-#
-## expand a window by moving one of its side outward
-#super + alt + {h,j,k,l}
-#	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
-#
-## contract a window by moving one of its side inward
-#super + alt + shift + {h,j,k,l}
-#	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
-#
-## move a floating window
-#super + {Left,Down,Up,Right}
-#	bspc node -v {-20 0,0 20,0 -20,20 0}
-#
-## rotate windows
-#super + {_,shift + }r
-#	bspc node @/ --rotate {90,-90}
-#
-## dynamic gaps
-#super + shift + {minus,plus}
-#	bspc config -d focused window_gap "$(($(bspc config -d focused window_gap) {-,+} 5 ))"
-#
-## default gap
-##super + equal
-##	bspc config -d focused window_gap 10
-#
-##
-#
-#
-##### DWM
-##
+# ========================= #
+# ===== EXIT/SHUTDOWN ===== #
+# ========================= #
+
 super + shift + c
 	dmenu-quit
-## wm independent hotkeys
-# ======================
+
+# =============================== #
+# ===== WM INDEPENDENT KEYS ===== #
+# =============================== #
 
 # terminal emulator
 super + Return
 	$TERMINAL
 
 # program launcher
+super + d
+	dmenu_run -l 20 -c -bw 2
 super + shift + Return
 	rofi -modi drun -show drun -show-icons
 
-# window switcher
-alt + Tab
-	~/.config/rofi/launchers/windows.sh
+# GRAPHICAL PROGRAMS
+# ------------------
+# browser
+ctrl + alt + i
+	brave
 
-#ctrl+alt+letter --> for applications
-#ctrl+shift+letter --> for files and folders
-
+# TERMINAL PROGRAMS
+# -----------------
 # file manager
 ctrl + alt + f
 	$TERMINAL -e lf
@@ -173,29 +35,19 @@ ctrl + alt + f
 ctrl + alt + e
 	$TERMINAL -e neomutt
 
-# resolution
-ctrl + alt + r
-	dmenurecord
-
-# lockscreen
-ctrl + alt + l
-	i3lock -k --blur=sigma
-
 # calcurse
 ctrl + alt + c
 	$TERMINAL -e calcurse
 
-# browser
-ctrl + alt + i
-	brave
-
-# Music (spotify and ncmpcpp}
-ctrl + alt + m;{s,n}
-	{spotify, $TERMINAL -T "ncmpcpp" -e ncmpcpp}
+# Music (ncmpcpp)
+ctrl + alt + m
+	$TERMINAL -T "ncmpcpp" -e ncmpcpp
 
 ctrl + alt + n
 	$TERMINAL -e newsboat; pkill -RTMIN+6 dwmblocks
 
+# SCRIPTS
+# -------
 # config files
 ctrl + shift + i
 	~/.local/bin/dmenu-configs
@@ -203,6 +55,10 @@ ctrl + shift + i
 # document finder
 ctrl + shift + p
 	sh ~/.local/bin/finder
+
+# lockscreen
+ctrl + alt + l
+	i3lock -k --blur=sigma
 
 # recording
 ctrl + shift + r
@@ -220,10 +76,9 @@ ctrl + alt + c; s
 super + Escape
 	pkill -USR1 -x sxhkd
 
-# media keys
-# ==========
-#
-#
+# ====================== #
+# ===== MEDIA KEY S===== #
+# ====================== #
 
 XF86MonBrightnessUp
 	brightnessControl up
@@ -248,25 +103,15 @@ XF86AudioNext
 XF86AudioPrev
 	mpc prev
  
-# XF86AudioPlay
-# 	playerctl play-pause & mpc toggle
-# 
-# XF86AudioNext
-# 	playerctl next & mpc next
-# 
-# XF86AudioPrev
-# 	playerctl previous & mpc prev
-# 
-# super + XF86AudioPlay
-# 	mictoggle
-# 
 super + less
 	mpc seek -10
 super + greater
 	mpc seek +10
 
-# media and volume control without specific media keys
-######################################################
+# ====================================== #
+# MEDIA CONTROL WITHOUT MEDIA KEYS ===== #
+# ====================================== #
+
 super + KP_Multiply
 	playerctl play-pause & mpc toggle & dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
 #
@@ -275,32 +120,21 @@ super + KP_Subtract
 
 super + KP_Add
 	pamixer --allow-boost -i 5; kill -44 $(pidof dwmblocks)
-#
+
 #super + greater
 #	playerctl next & mpc next
-#
+
 #super + less
 #	playerctl previous & mpc prev
-#
 
 super + KP_Insert
 	brightnessControl down
 super + KP_Delete
 	brightnessControl up
 
-# Print
-#######
-# 	escrotum ~/Imagens/screenshots/%Y-%m-%d-%H-%M-%S.png && notify-send 'Screenshot saved.'
-# 
-# shift + @Print
-# 	escrotum -s ~/Imagens/screenshots/%Y-%m-%d-%H-%M-%S.png && notify-send 'Screenshot saved.'
-
+# screenshots
 Print
 	scrot '%Y-%m-%d_%T.png' -e 'mv $f ~/Imagens/screenshots' && notify-send "Captura de tela salva em ~/Imagens/screenshots"
 
 shift + @Print
 	scrot -s '%Y-%m-%d_%T.png' -e 'mv $f ~/Imagens/screenshots' && notify-send "Captura de tela salva em ~/Imagens/screenshots"
-#super + Print
-#	sh $HOME/.local/bin/dmenurecord
-#super + shift + Print
-#	sh $HOME/.local/bin/dmenurecord kill
