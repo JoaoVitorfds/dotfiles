@@ -1,0 +1,9 @@
+#!/bin/sh
+
+x=$(ls ~/.config/xthemes | dmenu -b -i -p 'Escolha o tema: ')
+
+case "$x" in
+	*)
+		cp ~/.config/xtemas/$x ~/.Xresources && xrdb ~/.Xresources || exit 1
+esac
+
