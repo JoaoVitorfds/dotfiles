@@ -1,5 +1,7 @@
 let mapleader = " "
 
+syntax on
+
 " Usa a seleção do sistema
 set clipboard+=unnamedplus
 
@@ -7,7 +9,16 @@ set clipboard+=unnamedplus
 "map <C-q> :quit!<CR>
 "nmap q :quit!<CR>
 
-" Indentação automática
+" limpa a busca
+nnoremap <F3> :noh<CR>
+
+nnoremap gb :ls<CR>:b<Space>
+
+" Tabs
+set expandtab                   " Use spaces instead of tabs.
+set smarttab                    " Be smart using tabs ;)
+set shiftwidth=4                " One tab == four spaces.
+set tabstop=4                   " One tab == four spaces.
 map <leader>i :setlocal autoindent<CR>
 map <leader>I :setlocal noautoindent<CR>
 
@@ -30,16 +41,17 @@ noremap <leader>9 9gt
 
 " ctrl l vai para a ultima aba aberta
 au TabLeave * let g:lasttab = tabpagenr()
-nnoremap <silent> <c-l> :exe "tabn ".g:lasttab<cr>
-vnoremap <silent> <c-l> :exe "tabn ".g:lasttab<cr>
+nnoremap <silent> <c-u> :exe "tabn ".g:lasttab<cr>
+vnoremap <silent> <c-u> :exe "tabn ".g:lasttab<cr>
 
 " Redimensiona verticalmente quando há duas janelas
 map <c-n> <c-w><
 map <c-m> <c-w>>
 
 " Função de substituição
-nnoremap S :%s//gI<Left><Left><Left>
+nnoremap <leader>S :%s//gI<Left><Left><Left>
 
+nnoremap <leader><Tab> ncgn
 
 " Strip the newline from the end of a string
 function! Chomp(str)
@@ -72,32 +84,41 @@ autocmd FileType tex map <c-t> :call DmenuOpentex("tabe")<cr>
 autocmd FileType tex map <c-f> :call DmenuOpentex("e")<cr>
 
 "Lista de Plugins
-call plug#begin('~/local/share/nvim/plugged')
+call plug#begin('~/.local/share/nvim/plugged')
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'bling/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
 "Plug 'tpope/vim-surround'
 Plug 'lervag/vimtex'
-"Plug 'conornewton/vim-pandoc-markdown-preview'
 Plug 'junegunn/goyo.vim'
 "Plug 'junegunn/limelight.vim'
 Plug 'unblevable/quick-scope'
-"Plug 'dbmrq/vim-ditto'
-Plug 'dracula/vim', { 'as': 'dracula' }
-"Plug 'arcticicestudio/nord-vim'
+Plug 'dbmrq/vim-ditto'
+Plug 'ap/vim-css-color'
 call plug#end()
 
-set termguicolors
-colorscheme dracula
-
+"set bg=light
 set mouse=a
 set title
-syntax on
 set relativenumber
+set number
 set spelllang=pt
+
+set termguicolors
+colorscheme gruvbox
 
 "exmode - gq instead of Q
 map Q gq
+
+" Lightline
+" ====================
+" theme
+let g:lightline = {
+      \ 'colorscheme': 'simpleblack',
+      \ }
+" Always show statusline
+set laststatus=2
+" Uncomment to prevent non-normal modes showing in powerline and below powerline.
+set noshowmode
 
 " spellcheck
 map <leader>o :setlocal spell! spelllang=pt<CR>
@@ -109,24 +130,40 @@ map <leader>o :setlocal spell! spelllang=pt<CR>
 	map <leader>p :!opout <c-r>%<CR><CR>
 
 " Runs a script that cleans out tex build files whenever I close out of a .tex file.
-	autocmd VimLeave *.tex !texclear %
+	"autocmd VimLeave *.tex !texclear %
 
 " visualizador do mdf compilado em pdf
 let g:md_pdf_viewer="zathura"
 
 " Goyo
+" ======================
 map <leader>g :Goyo<CR>
 
-" Limelight
-map <leader>l :Limelight!!<CR>
-" Color name (:help cterm-colors) or ANSI code
-let g:limelight_conceal_ctermfg = 'gray'
-let g:limelight_conceal_ctermfg = 240
-" Color name (:help gui-colors) or RGB color
-let g:limelight_conceal_guifg = 'DarkGray'
-let g:limelight_conceal_guifg = '#777777'
+" quiting in goyo quits the file
+function! s:goyo_enter()
+  let b:quitting = 0
+  let b:quitting_bang = 0
+  autocmd QuitPre <buffer> let b:quitting = 1
+  cabbrev <buffer> q! let b:quitting_bang = 1 <bar> q!
+endfunction
 
-" deoplete
+function! s:goyo_leave()
+  " Quit Vim if this is the only remaining buffer
+  if b:quitting && len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
+    if b:quitting_bang
+      qa!
+    else
+      qa
+    endif
+  endif
+endfunction
+
+autocmd! User GoyoEnter call <SID>goyo_enter()
+autocmd! User GoyoLeave call <SID>goyo_leave()
+
+" Deoplete
+" ======================
+
 let g:deoplete#enable_at_startup = 1
 
 " <TAB>: completion.
@@ -150,12 +187,12 @@ let g:vimtex_view_general_viewer = 'zathura'
 " nerd tree
 map <leader>f :NERDTreeToggle<CR>
 
-"Override BG
-autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE
-
-" airline
-let g:airline#extensions#wordcount#enabled = 1
-let g:airline_theme='minimalist'
+" Override colors
+hi Normal guibg=NONE ctermbg=NONE
+"highlight clear CursorLineNR
+"highlight clear LineNR
+hi clear SpellBad
+hi SpellBad guibg=#ff2929 ctermbg=224
 
 " vim-ditto
 nmap <leader>di <Plug>ToggleDitto      " Turn Ditto on and off
@@ -170,13 +207,9 @@ autocmd BufRead /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
 
 autocmd Filetype rmd map <F5> :!echo<space>"require(rmarkdown);<space>render('<c-r>%')"<space>\|<space>R<space>--vanilla<enter>
 
-"autocmd FileType tex nnoremap <buffer> <F5> :!pdflatex %:t<CR><CR>
-"autocmd FileType tex nnoremap <buffer> <F6> :!zathura %:r.pdf<CR><CR>
 " Usa o plugin vimtex para compilar arquivos .tex
 autocmd FileType tex nmap <buffer> <F5> <localleader>ll
 
-"autocmd FileType markdown nnoremap <buffer> <F5> :!pandoc % -o %:r.pdf<CR><CR>
-"autocmd FileType markdown nnoremap <buffer> <F6> :!zathura %:r.pdf<CR><CR>
 " Usa o plugin vim pandoc markdown para compilar e visualizar arquivos .md
 autocmd FileType markdown nmap <F5> :StartMdPreview<CR><CR>
 
@@ -188,6 +221,10 @@ autocmd FileType python imap ,pr print()<Esc>i
 
 
 "LATEX SHORTCUTS
+autocmd FileType tex nnoremap ,def :-1read $HOME/.config/nvim/snip/latex/artigo.tex<CR>30gg
+
+autocmd FileType tex nnoremap <C-p> :silent !phrases<CR>
+
 autocmd FileType tex inoremap ,st \section{}<Esc>i
 autocmd FileType tex inoremap ,sst \subsection{}<Esc>i
 autocmd FileType tex inoremap ,ssst \subsubsection{}<Esc>i
@@ -202,5 +239,8 @@ autocmd Filetype tex inoremap ,fn \footnote{}<Esc>i
 autocmd Filetype tex inoremap ,sub \textsubscript{}<Esc>i
 autocmd Filetype tex inoremap ,sup \textsuperscript{}<Esc>i
 autocmd Filetype tex inoremap ,nd $\emptyset$
-autocmd Filetype tex inoremap ,start \documentclass[]{article}<CR><CR>\usepackage[portuguese]{babel}<CR>\usepackage{times}<CR>\usepackage{indentfirst}<CR>\usepackage{geometry}<Esc>A<CR><Tab>\geometry {<CR>top=3cm,<CR>bottom=3cm,<CR>right=3cm,<CR>left=3cm,<CR>}<CR><CR><BS>\begin{document}<CR><CR><CR>\end{document}<Esc>kO
-autocm Filetype tex inoremap ,abnt \documentclass[<CR><Tab>article,<CR>11pt,<CR>oneside,<CR>a4paper,<CR>english,<CR>brazil,<CR>sumario=tradicional<CR>]{abntex2}<CR><CR><BS>% PACOTES BÁSICOS<CR><BS>\usepackage{lmodern}<CR>\usepackage[T1]{fontenc}<CR>\usepackage{indentfirst}<CR>\usepackage{nomencl}<CR>\usepackage{color}<CR>\usepackage{graphicx}<CR>\usepackage{microtype}<CR><CR>% PACOTES DE CITACAO<CR>\usepackage[brazilian,hyperpageref]{backref}<Tab>% Bibliografia<CR>\usepackage[alf]{abntex2cite}<Tab>% Citacoes no texto<CR>
+
+"Bibliography
+autocmd Filetype bib nnoremap ,art :read $HOME/.config/nvim/snip/latex/art.bib<CR>/++<CR>cgn
+autocmd Filetype bib nnoremap <silent> ,bk :read $HOME/.config/nvim/snip/latex/book.bib<CR>/++<CR>cgn
+

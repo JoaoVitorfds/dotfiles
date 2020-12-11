@@ -5,10 +5,11 @@ set shell bash
 set shellopts '-eu'
 set ifs "\n"
 set scrolloff 10
-set color256 true
+#set color256 true
 set icons
 set drawbox
 set period 1
+set ratios '1:2:2'
 #set hiddenfiles ".*:*.aux:*.log:*.bbl:*.bcf:*.blg:*.run.xml"
 
 # Vars that depend on environmental variables
@@ -20,7 +21,7 @@ cmd open ${{
         text/*) $EDITOR $fx;;
 	image/x-xcf|image/svg+xml) setsid -f gimp $f >/dev/null 2>&1 ;;
 	image/*) rotdir $f | grep -i "\.\(png\|jpg\|jpeg\|gif\|webp\|tif\)\(_large\)*$" | sxiv -aio 2>/dev/null | lf-select ;;
-	audio/*) setsid -f mpv --audio-display=attachment $f >/dev/null 2>&1;;
+	audio/*) setsid -f mpv --audio-display=attachment --force-window $f >/dev/null 2>&1;;
 	video/*) setsid -f mpv $f -quiet >/dev/null 2>&1 ;;
 	application/pdf|application/vnd*|application/epub*) setsid -f zathura $fx >/dev/null 2>&1 ;;
         *) for f in $fx; do setsid -f $OPENER $f >/dev/null 2>&1; done;;
@@ -80,6 +81,7 @@ cmd setbg "$1"
 cmd bulkrename $vidir
 
 # Bindings
+map d
 map <c-f> $lf -remote "send $id select '$(fzf)'"
 map J $lf -remote "send $id cd $(cut -d'	' -f2 ${XDG_CONFIG_HOME:-$HOME/.config}/directories | fzf)"
 map gh
@@ -97,6 +99,7 @@ map x $$f
 map X !$f
 map o &mimeopen $f
 map O $mimeopen --ask $f
+map ds $du -sh $f | awk '{print $1}' | xargs notify-send
 
 map A rename # at the very end
 map c push A<c-u> # new rename
@@ -122,35 +125,38 @@ map zu unarchive
 map gh cd /home/joao
 map gtr cd ~/.local/share/Trash/files
 
-map gv. cd ~/Vídeos
+map gv. cd ~/videos
 
-map gm. cd ~/Música
+map gm. cd ~/musica
 
-map gi. cd ~/Imagens
-map gis cd ~/Imagens/screenshots
-map giw cd ~/Imagens/wallpapers
+map gi. cd ~/imagens
+map gis cd ~/imagens/screenshots
+map giw cd ~/imagens/wallpapers
 
-map ge cd ~/Documentos/estudos
-map gl. cd ~/Documentos/estudos/linguistica
-map glc cd ~/Documentos/estudos/linguistica/lc
-map gle cd ~/Documentos/estudos/linguistica/estruturalismo
-map glg cd ~/Documentos/estudos/linguistica/gerativismo
-map glp cd ~/Documentos/estudos/linguistica/psicolinguistica
-map glso cd ~/Documentos/estudos/linguistica/semiotica
-map glsa cd ~/Documentos/estudos/linguistica/semantica
-map gL. cd ~/Documentos/estudos/literatura
-map gLa cd ~/Documentos/estudos/literatura/africana
-map gLb cd ~/Documentos/estudos/literatura/brasileira
-map gLp cd ~/Documentos/estudos/literatura/portuguesa
-map glog cd ~/Documentos/estudos/logica
+map ge cd ~/docs/est
+map gl. cd ~/docs/est/ling
+map glc cd ~/docs/est/ling/lc
+map gle cd ~/docs/est/ling/estruturalismo
+map glg cd ~/docs/est/ling/gerativismo
+map glp cd ~/docs/est/ling/psicoling
+map glso cd ~/docs/est/ling/semiotica
+map glsa cd ~/docs/est/ling/semantica
+map gL. cd ~/docs/est/literatura
+map gLa cd ~/docs/est/literatura/africana
+map gLb cd ~/docs/est/literatura/brasileira
+map gLp cd ~/docs/est/literatura/portuguesa
+map glog cd ~/docs/est/logica
+map gufc cd ~/docs/est/ufc
 
-map gtx cd ~/Documentos/tex/
+map gal cd ~/docs/all/
 
-map gd cd ~/Documentos
+map gtx cd ~/docs/tex/
 
-map gD cd ~/Downloads
+map gd cd ~/docs
 
-map gpy cd ~/Documentos/estudos/linguistica/computacional/python
+map gD cd ~/docs/downloads
+
+map gpy cd ~/docs/est/ling/lc/ptn
 
 map gC cd ~/.config
 map gE cd /etc
