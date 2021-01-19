@@ -20,7 +20,8 @@ cmd open ${{
     case $(file --mime-type $f -b) in
         text/*) $EDITOR $fx;;
 	image/x-xcf|image/svg+xml) setsid -f gimp $f >/dev/null 2>&1 ;;
-	image/*) rotdir $f | grep -i "\.\(png\|jpg\|jpeg\|gif\|webp\|tif\)\(_large\)*$" | sxiv -aio 2>/dev/null | lf-select ;;
+	#image/*) rotdir $f | grep -i "\.\(png\|jpg\|jpeg\|gif\|webp\|tif\)\(_large\)*$" | sxiv -aio 2>/dev/null | lf-select ;;
+	image/*) setsid -f sxiv $f 2>/dev/null ;;
 	audio/*) setsid -f mpv --audio-display=attachment --force-window $f >/dev/null 2>&1;;
 	video/*) setsid -f mpv $f -quiet >/dev/null 2>&1 ;;
 	application/pdf|application/vnd*|application/epub*) setsid -f zathura $fx >/dev/null 2>&1 ;;
@@ -147,6 +148,7 @@ map gLb cd ~/docs/est/literatura/brasileira
 map gLp cd ~/docs/est/literatura/portuguesa
 map glog cd ~/docs/est/logica
 map gufc cd ~/docs/est/ufc
+map g202 cd ~/docs/est/ufc/202/
 
 map gal cd ~/docs/all/
 

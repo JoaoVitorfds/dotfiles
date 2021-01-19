@@ -1,7 +1,11 @@
 *.font: InputMono:size=12
-!! brogrammer: */
+
+! ---------------------- !
+! ----- BROGRAMMER ----- !
+! ---------------------- !
+
 *.foreground:  #d6dbe5
-*.background:  #131313
+*.background:  #000000
 *.color0:      #1f1f1f
 *.color8:      #d6dbe5
 *.color1:      #f81118
@@ -26,3 +30,14 @@
 *.dwm.selbordercolor: #2a84d2
 *.dwm.selbgcolor: #2a84d2
 *.dwm.selfgcolor: #131313
+
+*.dmenu.font: FantasqueSansMono:size=12
+*.dmenu.background: #131313
+*.dmenu.foreground: #d6dbe5
+*.dmenu.selbackground: #2a84d2
+*.dmenu.selforeground: #131313
+
+!SXIV
+Sxiv.font: FantasqueSansMono:size=12
+Sxiv.foreground: #2a84d2
+Sxiv.background: #131313

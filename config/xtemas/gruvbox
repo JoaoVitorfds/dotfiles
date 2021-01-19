@@ -1,6 +1,10 @@
 *.font: InputMono:size=12
-/* !! gruvbox: */
-*.color0: #1d2021 
+
+! ------------------- !
+! ----- GRUVBOX ----- !
+! ------------------- !
+
+*.color0: #1d2021
 *.color1: #cc241d 
 *.color2: #98971a 
 *.color3: #d79921 
@@ -19,9 +23,20 @@
 *.color256: #1d2021
 *.color257: #ebdbb2
 
+*.dmenu.font: FantasqueSansMono:size=12
 *.dwm.normbordercolor: #444444
 *.dwm.normbgcolor: #1d2021
 *.dwm.normfgcolor: #ebdbb2
 *.dwm.selbordercolor: #cc241d
 *.dwm.selbgcolor: #458588
 *.dwm.selfgcolor: #1d2021
+
+*.dmenu.background: #1d2021
+*.dmenu.foreground: #ebdbb2
+*.dmenu.selbackground: #458588
+*.dmenu.selforeground: #1d2021
+
+!SXIV
+Sxiv.font: FantasqueSansMono:size=12
+Sxiv.foreground: #458588
+Sxiv.background: #1d2021

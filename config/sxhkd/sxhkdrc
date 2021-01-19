@@ -41,7 +41,7 @@ ctrl + alt + c
 
 # Music (ncmpcpp)
 ctrl + alt + m
-	$TERMINAL -T "ncmpcpp" -e ncmpcpp
+	$TERMINAL -t "ncmpcpp" -e ncmpcpp
 
 ctrl + alt + n
 	$TERMINAL -e newsboat; pkill -RTMIN+6 dwmblocks
@@ -50,18 +50,18 @@ ctrl + alt + n
 # -------
 # config files
 ctrl + shift + i
-	~/.local/bin/dmenu-configs
+	dmenu-configs
 
 # document finder
 ctrl + shift + p
-	sh ~/.local/bin/finder
+	finder
 
 # lockscreen
 ctrl + alt + l
 	i3lock -k --blur=sigma
 
 # recording
-ctrl + shift + r
+ctrl + alt + r
 	dmenurecord
 
 # kill compton
@@ -113,7 +113,7 @@ super + greater
 # ====================================== #
 
 super + KP_Multiply
-	playerctl play-pause & mpc toggle & dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+	pamixer -t; kill -44 $(pidof dwmblocks)
 #
 super + KP_Subtract
 	pamixer --allow-boost -d 5; kill -44 $(pidof dwmblocks)
@@ -121,11 +121,14 @@ super + KP_Subtract
 super + KP_Add
 	pamixer --allow-boost -i 5; kill -44 $(pidof dwmblocks)
 
-#super + greater
-#	playerctl next & mpc next
-
-#super + less
-#	playerctl previous & mpc prev
+super + Right
+	mpc next
+super + Left
+	mpc prev
+super + Down
+	mpc toggle
+super + Up
+	mpc toggle
 
 super + KP_Insert
 	brightnessControl down
@@ -134,7 +137,13 @@ super + KP_Delete
 
 # screenshots
 Print
-	scrot '%Y-%m-%d_%T.png' -e 'mv $f ~/Imagens/screenshots' && notify-send "Captura de tela salva em ~/Imagens/screenshots"
+	scrot '%Y-%m-%d_%T.png' -e 'mv $f ~/imagens/screenshots' && notify-send "Captura de tela salva em ~/imagens/screenshots"
 
 shift + @Print
-	scrot -s '%Y-%m-%d_%T.png' -e 'mv $f ~/Imagens/screenshots' && notify-send "Captura de tela salva em ~/Imagens/screenshots"
+	scrot -s '%Y-%m-%d_%T.png' -e 'mv $f ~/imagens/screenshots' && notify-send "Captura de tela salva em ~/imagens/screenshots"
+
+super + F3
+	pamixer --allow-boost -d 5; kill -44 $(pidof dwmblocks)
+
+super + F4
+	pamixer --allow-boost -i 5; kill -44 $(pidof dwmblocks)

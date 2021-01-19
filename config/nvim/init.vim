@@ -1,34 +1,58 @@
+" Leader = space
 let mapleader = " "
 
+" Ctrl-Backspace deleta a palavra inteira
+inoremap <C-h> <C-\><C-o>db
+
+" Highlighting
 syntax on
+
+" Número de linhas abaixo do cursor
+set scrolloff=5
+
+" Cursor no centro da tela quando se usa j ou k
+nnoremap j jzz
+nnoremap k kzz
 
 " Usa a seleção do sistema
 set clipboard+=unnamedplus
 
 " Ctrl+q substitui :q!
-"map <C-q> :quit!<CR>
+map <C-q> :quit!<CR>
 "nmap q :quit!<CR>
 
 " limpa a busca
 nnoremap <F3> :noh<CR>
 
+" Buffers
+" ==========
 nnoremap gb :ls<CR>:b<Space>
+set wildcharm=<C-z>
+set wildmode=list:full
+set wildignorecase
+nnoremap <leader>b :buffer! <C-z><S-Tab>
+nnoremap <leader>vb :vert sbuffer! <C-z><S-Tab>
+nnoremap <leader>sb :sbuffer! <C-z><S-Tab>
+nnoremap <PageUp>   :bprevious!<CR>
+nnoremap <PageDown> :bnext!<CR>
 
 " Tabs
+" ==========
 set expandtab                   " Use spaces instead of tabs.
 set smarttab                    " Be smart using tabs ;)
 set shiftwidth=4                " One tab == four spaces.
 set tabstop=4                   " One tab == four spaces.
-map <leader>i :setlocal autoindent<CR>
-map <leader>I :setlocal noautoindent<CR>
 
-" Navegação entre tela dividida
+" Splits
+" ==========
+set splitbelow splitright
 map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 
-" Navegação entre abas
+" Abas
+" ==========
 noremap <leader>1 1gt
 noremap <leader>2 2gt
 noremap <leader>3 3gt
@@ -39,69 +63,44 @@ noremap <leader>7 7gt
 noremap <leader>8 8gt
 noremap <leader>9 9gt
 
-" ctrl l vai para a ultima aba aberta
-au TabLeave * let g:lasttab = tabpagenr()
-nnoremap <silent> <c-u> :exe "tabn ".g:lasttab<cr>
-vnoremap <silent> <c-u> :exe "tabn ".g:lasttab<cr>
-
-" Redimensiona verticalmente quando há duas janelas
+" Redimensiona verticalmente splits
 map <c-n> <c-w><
 map <c-m> <c-w>>
 
 " Função de substituição
 nnoremap <leader>S :%s//gI<Left><Left><Left>
 
+" Vai até o próximo match da seleção e o altera
 nnoremap <leader><Tab> ncgn
 
-" Strip the newline from the end of a string
-function! Chomp(str)
-  return substitute(a:str, '\n$', '', '')
-endfunction
-
-" Find a file and pass it to cmd
-function! DmenuOpen(cmd)
-  let fname = Chomp(system("find ~/Documentos -name '*.py' | dmenu -i -l 20 -p " . a:cmd))
-  if empty(fname)
-    return
-  endif
-  execute a:cmd . " " . fname
-endfunction
-
-function! DmenuOpentex(cmd)
-  let fname = Chomp(system("find ~/Documentos -name '*.tex' | dmenu -i -l 20 -p " . a:cmd))
-  if empty(fname)
-    return
-  endif
-  execute a:cmd . " " . fname
-endfunction
-
-" ctrl t abre o arquivo em nova aba
-autocmd FileType python map <c-t> :call DmenuOpen("tabe")<cr>
-autocmd FileType python map <c-f> :call DmenuOpen("e")<cr>
-
-" ctrl t abre o arquivo em nova aba
-autocmd FileType tex map <c-t> :call DmenuOpentex("tabe")<cr>
-autocmd FileType tex map <c-f> :call DmenuOpentex("e")<cr>
-
-"Lista de Plugins
+" Lista de Plugins
+" ==========
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'itchyny/lightline.vim'
-"Plug 'tpope/vim-surround'
 Plug 'lervag/vimtex'
 Plug 'junegunn/goyo.vim'
-"Plug 'junegunn/limelight.vim'
+Plug 'junegunn/limelight.vim'
 Plug 'unblevable/quick-scope'
 Plug 'dbmrq/vim-ditto'
 Plug 'ap/vim-css-color'
 call plug#end()
 
-"set bg=light
 set mouse=a
 set title
 set relativenumber
 set number
 set spelllang=pt
+
+augroup my-colors
+  autocmd!
+  autocmd ColorScheme * hi Normal guibg=NONE ctermbg=NONE
+  autocmd ColorScheme * hi NormalNC guibg=#303536 ctermbg=grey
+  autocmd ColorScheme * hi clear SpellBad
+  autocmd ColorScheme * hi SpellBad guibg=#ff2929 ctermbg=224
+  autocmd Colorscheme * hi clear LineNr
+  autocmd Colorscheme * set cursorline
+augroup END
 
 set termguicolors
 colorscheme gruvbox
@@ -130,14 +129,14 @@ map <leader>o :setlocal spell! spelllang=pt<CR>
 	map <leader>p :!opout <c-r>%<CR><CR>
 
 " Runs a script that cleans out tex build files whenever I close out of a .tex file.
-	"autocmd VimLeave *.tex !texclear %
+	autocmd VimLeave *.tex !texclear %
 
 " visualizador do mdf compilado em pdf
 let g:md_pdf_viewer="zathura"
 
 " Goyo
 " ======================
-map <leader>g :Goyo<CR>
+map <leader>g :set cursorline! <bar> hi NormalNC guibg=NONE ctermbg=NONE <bar> Goyo<CR>
 
 " quiting in goyo quits the file
 function! s:goyo_enter()
@@ -161,9 +160,22 @@ endfunction
 autocmd! User GoyoEnter call <SID>goyo_enter()
 autocmd! User GoyoLeave call <SID>goyo_leave()
 
+" Limelight
+" ==========
+
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
+
+" Color name (:help cterm-colors) or ANSI code
+let g:limelight_conceal_ctermfg = 'gray'
+let g:limelight_conceal_ctermfg = 240
+
+" Color name (:help gui-colors) or RGB color
+let g:limelight_conceal_guifg = 'DarkGray'
+let g:limelight_conceal_guifg = '#777777'
+
 " Deoplete
 " ======================
-
 let g:deoplete#enable_at_startup = 1
 
 " <TAB>: completion.
@@ -175,24 +187,11 @@ call deoplete#custom#var('omni', 'input_patterns', {
       \})
 
 " Autocompletar
-set wildmode=longest,list,full
-
-" Inverte o split - Novas janelas abrirao na direita e embaixo
-set splitbelow splitright
+"set wildmode=longest,list,full
 
 "Define o zathura como visualizador do vim-tex
 let g:tex_flavor = "latex"
 let g:vimtex_view_general_viewer = 'zathura'
-
-" nerd tree
-map <leader>f :NERDTreeToggle<CR>
-
-" Override colors
-hi Normal guibg=NONE ctermbg=NONE
-"highlight clear CursorLineNR
-"highlight clear LineNR
-hi clear SpellBad
-hi SpellBad guibg=#ff2929 ctermbg=224
 
 " vim-ditto
 nmap <leader>di <Plug>ToggleDitto      " Turn Ditto on and off
@@ -207,23 +206,31 @@ autocmd BufRead /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
 
 autocmd Filetype rmd map <F5> :!echo<space>"require(rmarkdown);<space>render('<c-r>%')"<space>\|<space>R<space>--vanilla<enter>
 
+" Python related mappings
+" ==========
+autocmd FileType python nmap <leader>r :w <bar> !python %<CR>
+autocmd FileType python nmap <leader>i :w <bar> te python -i %<CR>
+autocmd FileType python nmap <leader><Enter> :te<CR>i<CR>
+autocmd FileType python tnoremap <C-q> exit<CR>
+autocmd FileType python inoremap ,pr print()<Esc>i
+autocmd FileType python inoremap " ""<Esc>i
+autocmd FileType python inoremap ' ''<Esc>i
+autocmd FileType python inoremap [ []<Esc>i
+autocmd FileType python inoremap ( ()<Esc>i
+autocmd FileType python inoremap { {}<Esc>i
+
+" Markdown related mappings
+" =========
+autocmd FileType markdown nnoremap ,def :-1read $HOME/.config/nvim/snip/markdown/pre<CR>/++<CR>cgn
+
+" Latex related mappings
+" ==========
 " Usa o plugin vimtex para compilar arquivos .tex
 autocmd FileType tex nmap <buffer> <F5> <localleader>ll
 
-" Usa o plugin vim pandoc markdown para compilar e visualizar arquivos .md
-autocmd FileType markdown nmap <F5> :StartMdPreview<CR><CR>
+autocmd FileType tex nnoremap ,def :-1read $HOME/.config/nvim/snip/latex/artigo.tex<CR>
 
-" Run programas python
-autocmd FileType python nmap <leader>r :w <bar> !python %<CR>
-autocmd FileType python nmap <leader><Enter> :te<CR>i<CR>
-autocmd FileType python tnoremap <C-q> exit<CR>
-autocmd FileType python imap ,pr print()<Esc>i
-
-
-"LATEX SHORTCUTS
-autocmd FileType tex nnoremap ,def :-1read $HOME/.config/nvim/snip/latex/artigo.tex<CR>30gg
-
-autocmd FileType tex nnoremap <C-p> :silent !phrases<CR>
+autocmd FileType tex nnoremap ,abnt :-1read $HOME/docs/est/tex/templates/mytemplates/abnt.tex<CR>
 
 autocmd FileType tex inoremap ,st \section{}<Esc>i
 autocmd FileType tex inoremap ,sst \subsection{}<Esc>i
@@ -233,12 +240,19 @@ autocmd FileType tex inoremap ,lse \begin{enumerate}<CR>\end{enumerate}<Esc>kA<C
 autocmd Filetype tex inoremap ,dc \documentclass[]{}<Esc>i
 autocmd Filetype tex inoremap ,usp \usepackage{}<Esc>i
 autocmd Filetype tex inoremap ,bd \begin{document}<CR><CR>\end{document}<Esc>kA
+autocmd Filetype tex inoremap ,bg \begin{}<CR>\end{}<Esc>k$i
 autocmd Filetype tex inoremap ,neg \textbf{}<Esc>i
 autocmd Filetype tex inoremap ,ita \textit{}<Esc>i
 autocmd Filetype tex inoremap ,fn \footnote{}<Esc>i
 autocmd Filetype tex inoremap ,sub \textsubscript{}<Esc>i
 autocmd Filetype tex inoremap ,sup \textsuperscript{}<Esc>i
 autocmd Filetype tex inoremap ,nd $\emptyset$
+autocmd FileType tex inoremap " ``''<Esc>hi
+autocmd FileType tex inoremap ' `'<Esc>i
+autocmd FileType tex inoremap [ []<Esc>i
+autocmd FileType tex inoremap ( ()<Esc>i
+autocmd FileType tex inoremap { {}<Esc>i
+"autocmd FileType tex inoremap ,` ``
 
 "Bibliography
 autocmd Filetype bib nnoremap ,art :read $HOME/.config/nvim/snip/latex/art.bib<CR>/++<CR>cgn

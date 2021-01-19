@@ -1,3 +1,4 @@
+set selection-clipboard clipboard
 set statusbar-h-padding 0
 set statusbar-v-padding 0
 set page-padding 1
@@ -10,3 +11,9 @@ map K zoom in
 map J zoom out
 map i recolor
 map p print
+
+set recolor   
+set recolor-lightcolor \#1d2021
+set recolor-darkcolor \#d0d0d0
+set recolor-keephue
+set default-bg \#222230

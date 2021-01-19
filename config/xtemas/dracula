@@ -1,5 +1,9 @@
 *.font: InputMono:size=12
-! Dracula Xresources palette
+
+! ------------------- !
+! ----- Dracula ----- !
+! ------------------- !
+
 *.foreground: #F8F8F2
 *.background: #282A36
 *.color0:     #000000
@@ -25,3 +29,14 @@
 *.dwm.selbordercolor: #BD93F9
 *.dwm.selbgcolor: #BD93F9
 *.dwm.selfgcolor: #282A36
+
+*.dmenu.font: FantasqueSansMono:size=12
+*.dmenu.background: #282A36
+*.dmenu.foreground: #F8F8F2
+*.dmenu.selbackground: #BD93F9
+*.dmenu.selforeground: #282A36
+
+!SXIV
+Sxiv.font: FantasqueSansMono:size=12
+Sxiv.foreground: #BD93F9
+Sxiv.background: #282A36
