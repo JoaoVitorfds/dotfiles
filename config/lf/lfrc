@@ -20,11 +20,12 @@ cmd open ${{
     case $(file --mime-type $f -b) in
         text/*) $EDITOR $fx;;
 	image/x-xcf|image/svg+xml) setsid -f gimp $f >/dev/null 2>&1 ;;
-	#image/*) rotdir $f | grep -i "\.\(png\|jpg\|jpeg\|gif\|webp\|tif\)\(_large\)*$" | sxiv -aio 2>/dev/null | lf-select ;;
-	image/*) setsid -f sxiv $f 2>/dev/null ;;
+    image/*) rotdir $f | grep -i "\.\(png\|jpg\|jpeg\|gif\|webp\|tif\|ico\)\(_large\)*$" | sxiv -aio 2>/dev/null | lf-select ;;
+	#image/*) setsid -f sxiv $f 2>/dev/null ;;
 	audio/*) setsid -f mpv --audio-display=attachment --force-window $f >/dev/null 2>&1;;
 	video/*) setsid -f mpv $f -quiet >/dev/null 2>&1 ;;
 	application/pdf|application/vnd*|application/epub*) setsid -f zathura $fx >/dev/null 2>&1 ;;
+	application/vnd.openxmlformats-officedocument.wordprocessingml.document*) setsid -f lowriter $fx >/dev/null 2>&1 ;;
         *) for f in $fx; do setsid -f $OPENER $f >/dev/null 2>&1; done;;
     esac
 }}
@@ -139,14 +140,13 @@ map gl. cd ~/docs/est/ling
 map glc cd ~/docs/est/ling/lc
 map gle cd ~/docs/est/ling/estruturalismo
 map glg cd ~/docs/est/ling/gerativismo
-map glp cd ~/docs/est/ling/psicoling
 map glso cd ~/docs/est/ling/semiotica
 map glsa cd ~/docs/est/ling/semantica
-map gL. cd ~/docs/est/literatura
-map gLa cd ~/docs/est/literatura/africana
-map gLb cd ~/docs/est/literatura/brasileira
-map gLp cd ~/docs/est/literatura/portuguesa
-map glog cd ~/docs/est/logica
+map gL. cd ~/docs/est/lit
+map gLa cd ~/docs/est/lit/africana
+map gLb cd ~/docs/est/lit/brasileira
+map gLp cd ~/docs/est/lit/portuguesa
+map glog cd ~/docs/est/fil/logica
 map gufc cd ~/docs/est/ufc
 map g202 cd ~/docs/est/ufc/202/
 

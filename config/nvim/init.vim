@@ -8,7 +8,10 @@ inoremap <C-h> <C-\><C-o>db
 syntax on
 
 " Número de linhas abaixo do cursor
-set scrolloff=5
+set scrolloff=10
+
+" Muda o diretório de trabalho para o diretório do arquivo aberto
+autocmd BufEnter * silent! lcd %:p:h
 
 " Cursor no centro da tela quando se usa j ou k
 nnoremap j jzz
@@ -228,30 +231,31 @@ autocmd FileType markdown nnoremap ,def :-1read $HOME/.config/nvim/snip/markdown
 " Usa o plugin vimtex para compilar arquivos .tex
 autocmd FileType tex nmap <buffer> <F5> <localleader>ll
 
+"autocmd FileType tex nnoremap ,def :-1read $HOME/.config/nvim/snip/latex/artigo.tex<CR>
 autocmd FileType tex nnoremap ,def :-1read $HOME/.config/nvim/snip/latex/artigo.tex<CR>
 
-autocmd FileType tex nnoremap ,abnt :-1read $HOME/docs/est/tex/templates/mytemplates/abnt.tex<CR>
+autocmd FileType tex nnoremap ,abnt :-1read $HOME/docs/tex/templates/mytemplates/abnt.tex<CR>
 
-autocmd FileType tex inoremap ,st \section{}<Esc>i
-autocmd FileType tex inoremap ,sst \subsection{}<Esc>i
-autocmd FileType tex inoremap ,ssst \subsubsection{}<Esc>i
-autocmd FileType tex inoremap ,lsi \begin{itemize}<CR>\end{itemize}<Esc>kA<CR>\item 
-autocmd FileType tex inoremap ,lse \begin{enumerate}<CR>\end{enumerate}<Esc>kA<CR>\item 
-autocmd Filetype tex inoremap ,dc \documentclass[]{}<Esc>i
-autocmd Filetype tex inoremap ,usp \usepackage{}<Esc>i
-autocmd Filetype tex inoremap ,bd \begin{document}<CR><CR>\end{document}<Esc>kA
-autocmd Filetype tex inoremap ,bg \begin{}<CR>\end{}<Esc>k$i
-autocmd Filetype tex inoremap ,neg \textbf{}<Esc>i
-autocmd Filetype tex inoremap ,ita \textit{}<Esc>i
-autocmd Filetype tex inoremap ,fn \footnote{}<Esc>i
-autocmd Filetype tex inoremap ,sub \textsubscript{}<Esc>i
-autocmd Filetype tex inoremap ,sup \textsuperscript{}<Esc>i
-autocmd Filetype tex inoremap ,nd $\emptyset$
+autocmd FileType tex,markdown inoremap ,st \section{}<Esc>i
+autocmd FileType tex,markdown inoremap ,sst \subsection{}<Esc>i
+autocmd FileType tex,markdown inoremap ,ssst \subsubsection{}<Esc>i
+autocmd FileType tex,markdown inoremap ,lsi \begin{itemize}<CR>\end{itemize}<Esc>kA<CR>\item 
+autocmd FileType tex,markdown inoremap ,lse \begin{enumerate}<CR>\end{enumerate}<Esc>kA<CR>\item 
+autocmd Filetype tex,markdown inoremap ,dc \documentclass[]{}<Esc>i
+autocmd Filetype tex,markdown inoremap ,usp \usepackage{}<Esc>i
+autocmd Filetype tex,markdown inoremap ,bd \begin{document}<CR><CR>\end{document}<Esc>kA
+autocmd Filetype tex,markdown inoremap ,bg \begin{}<CR>\end{}<Esc>k$i
+autocmd Filetype tex,markdown inoremap ,neg \textbf{}<Esc>i
+autocmd Filetype tex,markdown inoremap ,ita \textit{}<Esc>i
+autocmd Filetype tex,markdown inoremap ,fn \footnote{}<Esc>i
+autocmd Filetype tex,markdown inoremap ,sub \textsubscript{}<Esc>i
+autocmd Filetype tex,markdown inoremap ,sup \textsuperscript{}<Esc>i
+autocmd Filetype tex,markdown inoremap ,nd $\emptyset$
 autocmd FileType tex inoremap " ``''<Esc>hi
 autocmd FileType tex inoremap ' `'<Esc>i
-autocmd FileType tex inoremap [ []<Esc>i
-autocmd FileType tex inoremap ( ()<Esc>i
-autocmd FileType tex inoremap { {}<Esc>i
+autocmd FileType tex,markdown inoremap [ []<Esc>i
+autocmd FileType tex,markdown inoremap ( ()<Esc>i
+autocmd FileType tex,markdown inoremap { {}<Esc>i
 "autocmd FileType tex inoremap ,` ``
 
 "Bibliography

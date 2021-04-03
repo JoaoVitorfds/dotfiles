@@ -1,0 +1,149 @@
+# ========================= #
+# ===== EXIT/SHUTDOWN ===== #
+# ========================= #
+
+super + shift + c
+	dmenu-quit
+
+# =============================== #
+# ===== WM INDEPENDENT KEYS ===== #
+# =============================== #
+
+# terminal emulator
+super + Return
+	$TERMINAL
+
+# program launcher
+super + d
+	dmenu_run -l 20 -c -bw 2
+super + shift + Return
+	rofi -modi drun -show drun -show-icons
+
+# GRAPHICAL PROGRAMS
+# ------------------
+# browser
+ctrl + alt + i
+	brave
+
+# TERMINAL PROGRAMS
+# -----------------
+# file manager
+ctrl + alt + f
+	$TERMINAL -e lf
+
+# mail
+ctrl + alt + e
+	$TERMINAL -e neomutt
+
+# calcurse
+ctrl + alt + c
+	$TERMINAL -e calcurse
+
+# Music (ncmpcpp)
+ctrl + alt + m
+	$TERMINAL -t "ncmpcpp" -e ncmpcpp
+
+ctrl + alt + n
+	$TERMINAL -e newsboat; pkill -RTMIN+6 dwmblocks
+
+# SCRIPTS
+# -------
+# config files
+ctrl + shift + i
+	dmenu-configs
+
+# document finder
+ctrl + shift + p
+	finder
+
+# lockscreen
+ctrl + alt + l
+	i3lock -k --blur=sigma
+
+# recording
+ctrl + alt + r
+	dmenurecord
+
+# kill compton
+ctrl + alt + c; k
+	killall compton && notify-send 'Compton - OFF'
+
+# start compton
+ctrl + alt + c; s
+	compton -b --config ~/.config/compton/compton.conf && notify-send 'Compton - ON'
+
+# make sxhkd reload its configuration files:
+super + Escape
+	pkill -USR1 -x sxhkd
+
+# ====================== #
+# ===== MEDIA KEY S===== #
+# ====================== #
+
+XF86MonBrightnessUp
+	brightnessControl up
+XF86MonBrightnessDown
+	brightnessControl down
+
+XF86AudioRaiseVolume
+	pamixer --allow-boost -i 5; kill -44 $(pidof dwmblocks)
+ 
+XF86AudioLowerVolume
+	pamixer --allow-boost -d 5; kill -44 $(pidof dwmblocks)
+
+XF86AudioMute
+	pamixer -t; kill -44 $(pidof dwmblocks)
+
+XF86AudioPlay
+	mpc toggle
+XF86AudioStop
+	mpc stop
+XF86AudioNext
+	mpc next
+XF86AudioPrev
+	mpc prev
+ 
+super + less
+	mpc seek -10
+super + greater
+	mpc seek +10
+
+# ====================================== #
+# MEDIA CONTROL WITHOUT MEDIA KEYS ===== #
+# ====================================== #
+
+super + KP_Multiply
+	pamixer -t; kill -44 $(pidof dwmblocks)
+#
+super + KP_Subtract
+	pamixer --allow-boost -d 5; kill -44 $(pidof dwmblocks)
+
+super + KP_Add
+	pamixer --allow-boost -i 5; kill -44 $(pidof dwmblocks)
+
+super + Right
+	mpc next
+super + Left
+	mpc prev
+super + Down
+	mpc toggle
+super + Up
+	mpc toggle
+
+super + KP_Insert
+	brightnessControl down
+super + KP_Delete
+	brightnessControl up
+
+# screenshots
+Print
+	scrot '%Y-%m-%d_%T.png' -e 'mv $f ~/imagens/screenshots' && notify-send "Captura de tela salva em ~/imagens/screenshots"
+
+shift + @Print
+	scrot -s '%Y-%m-%d_%T.png' -e 'mv $f ~/imagens/screenshots' && notify-send "Captura de tela salva em ~/imagens/screenshots"
+
+super + F3
+	pamixer --allow-boost -d 5; kill -44 $(pidof dwmblocks)
+
+super + F4
+	pamixer --allow-boost -i 5; kill -44 $(pidof dwmblocks)

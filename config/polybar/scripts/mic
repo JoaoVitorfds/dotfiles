@@ -1,3 +1,0 @@
-#!/bin/bash
-
-amixer get Capture | grep '\[off\]' > /dev/null && echo "" || echo ""
