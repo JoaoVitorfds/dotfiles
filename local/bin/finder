@@ -1,0 +1,39 @@
+#!/bin/bash
+
+declare options=("pdf
+djvu
+epub
+md
+doc/odt
+tex")
+
+choice=$(echo -e "${options[@]}" | dmenu -b -i -p 'Escolha a extensão do arquivo: ')
+
+case "$choice" in
+	quit)
+		echo "Program terminated." && exit 1
+	;;
+	pdf)
+		find ~/docs -name "*.pdf" | dmenu -b -l 10 -i -p 'Escolha um arquivo: ' | xargs -I {} zathura "{}"
+	;;
+	djvu)
+		find ~/docs -name "*.djvu" | dmenu -b -l 10 -i -p 'Escolha um arquivo: ' | xargs -I {} tabbed -c zathura "{}" -e
+	;;
+	epub)
+		find ~/docs -name "*.epub" | dmenu -b -l 10 -i -p 'Escolha um arquivo: ' | xargs -I {} tabbed -c zathura "{}" -e
+	;;
+	tex)
+		#var="$(find /media/w10shrd -name "*.tex" | dmenu -b -l 10 -fn "FantasqueSansMono" -nb "#282a36" -sb "#bd93f9" -p 'Escolha um arquivo: ')"
+		#$TERMINAL -e nvim $var
+		find ~/docs -name "*.tex" | dmenu -b -l 10 -i  -p 'Escolha um arquivo: ' | xargs -I {} $TERMINAL -e nvim {}
+	;;
+	md)
+		find ~/docs -name "*.md" | dmenu -b -l 10 -i -p 'Escolha um arquivo: ' | xargs -I {} $TERMINAL -e nvim {}
+	;;
+	doc/odt)
+		find ~/docs -name "*.docx" -o -name "*.doc" -o -name "*.odt" | dmenu -b -l 10 -i -p 'Escolha um arquivo: ' | xargs -I {} $TERMINAL -e lowriter {}
+	;;
+	*)
+		exit 1
+	;;
+esac

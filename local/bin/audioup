@@ -1,0 +1,4 @@
+#!/bin/sh
+
+pamixer --allow-boost -i 5; kill -44 $(pidof dwmblocks)
+notify-send $(amixer -D pulse sget Master | grep 'Left:' | awk -F'[][]' '{ print $2 }')

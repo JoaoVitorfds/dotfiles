@@ -1,0 +1,9 @@
+#!/bin/sh
+
+killall clipit &
+killall xclip &
+killall unclutter &
+killall mpd &
+killall picom &
+killall dunst &
+killall redshift &

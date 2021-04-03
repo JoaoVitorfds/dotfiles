@@ -1,0 +1,9 @@
+#!/bin/sh
+
+v=$(amixer get Capture | grep off)
+
+#amixer get Capture | grep off && amixer set Capture toggle && notify-send "Microfone ativado"
+
+#amixer get Capture | grep on && amixer set Capture toggle && notify-send "Microfone desativado"
+
+[ -z "$v" ] && amixer set Capture toggle && notify-send "Microfone desativado" || amixer set Capture toggle && notify-send "Microfone ativado"
