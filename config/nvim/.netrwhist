@@ -1,5 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =9
+let g:netrw_dirhistcnt =0
+let g:netrw_dirhist_0='/home/joao/.config/sxhkd'
 let g:netrw_dirhist_9='/home/joao/docs/est/tex/templates/mytemplates'
 let g:netrw_dirhist_8='/home/joao/docs/est/ufc/202/202-atividades/litbr2/atividades'
 let g:netrw_dirhist_7='/home/joao/docs/est/tex/templates/mytemplates'
@@ -9,4 +10,3 @@ let g:netrw_dirhist_4='/home/joao/docs/est/ling/lc/ptn/capitulo1'
 let g:netrw_dirhist_3='/home/joao/docs/est/ling/lc/ptn'
 let g:netrw_dirhist_2='/home/joao/.config/nvim/snip/latex'
 let g:netrw_dirhist_1='/home/joao/docs/est/tex/templates/abnt'
-let g:netrw_dirhist_0='/home/joao/docs/est/tex/templates/mytemplates'

@@ -16,8 +16,6 @@ super + Return
 # program launcher
 super + d
 	dmenu_run -l 20 -c -bw 2
-super + shift + Return
-	rofi -modi drun -show drun -show-icons
 
 # GRAPHICAL PROGRAMS
 # ------------------
@@ -120,6 +118,9 @@ super + KP_Subtract
 
 super + KP_Add
 	pamixer --allow-boost -i 5; kill -44 $(pidof dwmblocks)
+
+super + KP_Divide
+	mictoggle; kill -45 $(pidof dwmblocks)
 
 super + Right
 	mpc next

@@ -33,11 +33,11 @@ nnoremap gb :ls<CR>:b<Space>
 set wildcharm=<C-z>
 set wildmode=list:full
 set wildignorecase
-nnoremap <leader>b :buffer! <C-z><S-Tab>
+nnoremap <leader>lb :buffer! <C-z><S-Tab>
 nnoremap <leader>vb :vert sbuffer! <C-z><S-Tab>
 nnoremap <leader>sb :sbuffer! <C-z><S-Tab>
-nnoremap <PageUp>   :bprevious!<CR>
-nnoremap <PageDown> :bnext!<CR>
+nnoremap <leader>bp :bprevious!<CR>
+nnoremap <leader>bn :bnext!<CR>
 
 " Tabs
 " ==========

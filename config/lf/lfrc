@@ -20,8 +20,8 @@ cmd open ${{
     case $(file --mime-type $f -b) in
         text/*) $EDITOR $fx;;
 	image/x-xcf|image/svg+xml) setsid -f gimp $f >/dev/null 2>&1 ;;
-    image/*) rotdir $f | grep -i "\.\(png\|jpg\|jpeg\|gif\|webp\|tif\|ico\)\(_large\)*$" | sxiv -aio 2>/dev/null | lf-select ;;
-	#image/*) setsid -f sxiv $f 2>/dev/null ;;
+    #image/*) rotdir $f | grep -i "\.\(png\|jpg\|jpeg\|gif\|webp\|tif\|ico\)\(_large\)*$" | sxiv -aio 2>/dev/null | lf-select ;;
+	image/*) setsid -f sxiv $f 2>/dev/null ;;
 	audio/*) setsid -f mpv --audio-display=attachment --force-window $f >/dev/null 2>&1;;
 	video/*) setsid -f mpv $f -quiet >/dev/null 2>&1 ;;
 	application/pdf|application/vnd*|application/epub*) setsid -f zathura $fx >/dev/null 2>&1 ;;
@@ -138,6 +138,7 @@ map giw cd ~/imagens/wallpapers
 map ge cd ~/docs/est
 map gl. cd ~/docs/est/ling
 map glc cd ~/docs/est/ling/lc
+map glpy cd ~/docs/est/ling/lc/ptn
 map gle cd ~/docs/est/ling/estruturalismo
 map glg cd ~/docs/est/ling/gerativismo
 map glso cd ~/docs/est/ling/semiotica
@@ -149,6 +150,7 @@ map gLp cd ~/docs/est/lit/portuguesa
 map glog cd ~/docs/est/fil/logica
 map gufc cd ~/docs/est/ufc
 map g202 cd ~/docs/est/ufc/202/
+map g211 cd ~/docs/est/ufc/211/
 
 map gal cd ~/docs/all/
 
@@ -158,7 +160,7 @@ map gd cd ~/docs
 
 map gD cd ~/docs/downloads
 
-map gpy cd ~/docs/est/ling/lc/ptn
+map gpy cd ~/docs/est/prog/python
 
 map gC cd ~/.config
 map gE cd /etc

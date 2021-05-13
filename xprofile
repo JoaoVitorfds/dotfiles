@@ -1,0 +1,35 @@
+#!/bin/sh
+# This file runs when a DM logs you into a graphical session.
+# If you use startx/xinit like a Chad, this file will also be sourced.
+
+# Fix Gnome Apps Slow  Start due to failing services
+# Add this when you include flatpak in your system
+dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
+
+clipit &
+sxhkd &
+remaps &
+# sh $HOME/.config/polybar/launch.sh
+xclip &
+# clipit &
+unclutter &
+mpd && mpdup &			# music player daemon-you might prefer it as a service though
+picom &
+dunst &			# dunst for notifications
+redshift &
+#xsetroot -name $(dwmbar) &
+dwmblocks &
+
+# disable screensaving
+xset -dpms &
+xset s off &
+
+# setxkbmap -option caps:escape & # turns caps lock into a aditional escape key
+
+xrdb merge $HOME/.config/Xresources
+
+# enable touchpad tapping to click
+# xinput set-prop 11 301 1
+
+# wallpaper
+nitrogen --restore &

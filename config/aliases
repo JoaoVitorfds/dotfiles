@@ -1,0 +1,39 @@
+alias ls='ls --color'
+alias grep='grep --color=auto'
+alias p='sudo pacman --color=auto'
+alias ..='cd ..'
+alias b='nvim ~/docs/tex/bibliografia.bib'
+alias n='nvim'
+
+alias nt='newtitle'
+alias gt='gettitle'
+alias o='xdg-open'
+
+alias t='trans'
+
+# movement
+alias gall='cd ~/docs/all'
+alias gl.='cd ~/docs/est/ling'
+alias glg='cd ~/docs/est/ling/gerativismo'
+alias gle='cd ~/docs/est/ling/estruturalismo'
+alias glp='cd ~/docs/est/ling/psicoling'
+alias glsa='cd ~/docs/est/ling/semantica'
+alias glso='cd ~/docs/est/ling/semiotica'
+alias glc='cd ~/docs/est/ling/lc'
+alias glpy='cd ~/docs/est/ling/lc/ptn'
+alias gpy='cd ~/docs/est/prog/python'
+alias gL.='cd ~/docs/est/lit'
+alias gLa='cd ~/docs/est/lit/africana'
+alias gLb='cd ~/docs/est/lit/brasileira'
+alias gLp='cd ~/docs/est/lit/portuguesa'
+alias glog='cd ~/docs/est/fil/logica'
+alias gufc='cd ~/docs/est/ufc'
+alias g202='cd ~/docs/est/ufc/202'
+alias g202a='cd ~/docs/est/ufc/202/202-atividades'
+alias g211='cd ~/docs/est/ufc/211'
+alias g211a='cd ~/docs/est/ufc/211/202-atividades'
+
+
+se() {du --exclude=~/.config/BraveSoftware/* -a ~/.local/bin/* ~/.config/* | awk '{print $2}' | fzf | xargs -r $EDITOR ;}
+
+zatb() {tabbed -c zathura "$1" -e}

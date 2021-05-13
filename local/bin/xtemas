@@ -1,9 +1,0 @@
-#!/bin/sh
-
-x=$(ls ~/.config/xtemas | dmenu -b -i -p 'Escolha o tema: ')
-
-case "$x" in
-	*)
-        cp ~/.config/xtemas/$x ~/.config/Xresources && sed -i "s/^colorscheme.*$/colorscheme $x/g" "$HOME/.config/nvim/init.vim" && xrdb merge ~/.config/Xresources & cp ~/.config/termite/themes/$x ~/.config/termite/config || exit 1
-esac
-

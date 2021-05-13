@@ -1,0 +1,4 @@
+#!/bin/sh
+x=$1
+
+mpv av://v4l2:/dev/video$1 --profile=low-latency --untimed

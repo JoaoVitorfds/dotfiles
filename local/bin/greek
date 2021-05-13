@@ -1,6 +1,5 @@
 #!/bin/sh
 
-# Get user selection via dmenu from emoji file.
 chosen=$(cat ~/docs/est/ling/greek | dmenu -l 30 | sed "s/;.*//")
 
 # Exit if none chosen.

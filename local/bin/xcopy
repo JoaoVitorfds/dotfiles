@@ -1,5 +1,0 @@
-#!/bin/sh
-
-v=${1}
-
-echo $1 | xclip -selection clipboard
