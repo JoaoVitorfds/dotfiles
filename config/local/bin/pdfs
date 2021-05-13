@@ -1,2 +1,0 @@
-#!/bin/sh
-find /media/w10shrd/ -name "*.pdf" | dmenu -b -l 10 -fn "Fantasque Sans Mono" -nb "#2e3440" -sb "#5e81ac" -p "Escolha um arquivo: " | xargs -I {} zathura "{}"
