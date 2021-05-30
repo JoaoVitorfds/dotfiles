@@ -19,6 +19,7 @@ clock=$(date '+%I')
 #esac
 
 icon=" "
+iconcal=" "
 
 case $BLOCK_BUTTON in
 	1) notify-send "This Month" "$(cal --color=always | sed "s/..7m/<b><span color=\"red\">/;s/..27m/<\/span><\/b>/")" && notify-send "Appointments" "$(calcurse -d3)" ;;
@@ -28,4 +29,4 @@ case $BLOCK_BUTTON in
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
-date "+%a, %d de %b $icon%H:%M "
+date "+$iconcal%d/%m/%y $icon%H:%M "
