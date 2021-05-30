@@ -26,6 +26,7 @@ cmd open ${{
 	video/*) setsid -f mpv $f -quiet >/dev/null 2>&1 ;;
 	application/pdf|application/vnd*|application/epub*) setsid -f zathura $fx >/dev/null 2>&1 ;;
 	application/vnd.openxmlformats-officedocument.wordprocessingml.document*) setsid -f lowriter $fx >/dev/null 2>&1 ;;
+	application/vnd.oasis.opendocument.spreadsheet*) setsid -f localc $fx >/dev/null 2>&1 ;;
         *) for f in $fx; do setsid -f $OPENER $f >/dev/null 2>&1; done;;
     esac
 }}
@@ -127,40 +128,42 @@ map zu unarchive
 map gh cd /home/joao
 map gtr cd ~/.local/share/Trash/files
 
-map gv. cd ~/videos
+map gv. cd ~/Videos
 
-map gm. cd ~/musica
+map gm. cd ~/Music
 
-map gi. cd ~/imagens
-map gis cd ~/imagens/screenshots
-map giw cd ~/imagens/wallpapers
+map gi. cd ~/Pictures
+map gis cd ~/Pictures/screenshots
+map giw cd ~/Pictures/wallpapers
 
-map ge cd ~/docs/est
-map gl. cd ~/docs/est/ling
-map glc cd ~/docs/est/ling/lc
-map glpy cd ~/docs/est/ling/lc/ptn
-map gle cd ~/docs/est/ling/estruturalismo
-map glg cd ~/docs/est/ling/gerativismo
-map glso cd ~/docs/est/ling/semiotica
-map glsa cd ~/docs/est/ling/semantica
-map gL. cd ~/docs/est/lit
-map gLa cd ~/docs/est/lit/africana
-map gLb cd ~/docs/est/lit/brasileira
-map gLp cd ~/docs/est/lit/portuguesa
-map glog cd ~/docs/est/fil/logica
-map gufc cd ~/docs/est/ufc
-map g202 cd ~/docs/est/ufc/202/
-map g211 cd ~/docs/est/ufc/211/
+map ge cd ~/Documents/est
+map gl. cd ~/Documents/est/ling
+map glc cd ~/Documents/est/ling/lc
+map glpy cd ~/Documents/est/ling/lc/ptn
+map gle cd ~/Documents/est/ling/estruturalismo
+map glg cd ~/Documents/est/ling/gerativismo
+map glso cd ~/Documents/est/ling/semiotica
+map glsa cd ~/Documents/est/ling/semantica
+map gL. cd ~/Documents/est/lit
+map gLa cd ~/Documents/est/lit/africana
+map gLb cd ~/Documents/est/lit/brasileira
+map gLp cd ~/Documents/est/lit/portuguesa
+map glog cd ~/Documents/est/fil/logica
+map gufc cd ~/Documents/est/ufc
+map g202 cd ~/Documents/est/ufc/202/
+map g211 cd ~/Documents/est/ufc/211/
 
-map gal cd ~/docs/all/
+map gal cd ~/Documents/all/
 
-map gtx cd ~/docs/tex/
+map gtx cd ~/Documents/tex/
 
-map gd cd ~/docs
+map gd cd ~/Documents
 
-map gD cd ~/docs/downloads
+map gD cd ~/Documents/downloads
 
-map gpy cd ~/docs/est/prog/python
+map gpy cd ~/Documents/est/prog/python
+
+map gmo cd ~/Documents/est/ufc/monitoria
 
 map gC cd ~/.config
 map gE cd /etc

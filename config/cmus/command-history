@@ -1,0 +1,14 @@
+help
+set output_plugin=pulse
+:set output_plugin=pulse
+set aaa_mode=album
+set aaa_mode=all
+w
+set play_library=false
+set play_sorted=false
+set continue=true
+set status_display_program=cmus-status-display
+set status_display_program
+set status_display_program=cmd-status-display
+clear
+live-filter 

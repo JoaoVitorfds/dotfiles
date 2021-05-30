@@ -1,11 +1,9 @@
 %xelatex
 \documentclass[a4paper,12pt]{article}
 
-\input{~/docs/est/tex/templates/mytemplates/abnt}
-
-\usepackage[backend=biber, style=abnt]{biblatex}
-\usepackage{times} % Fonte do documento
+\usepackage{fontspec}
 \usepackage{titlesec}
+\setmainfont{TeX Gyre Pagella}
 
 % Define uma fonte tamanho 12 para seções e subseções
 \titleformat{\section}
@@ -13,13 +11,8 @@
 \titleformat{\subsection}
   {\normalfont\fontsize{12}{15}\bfseries}{\thesubsection}{1em}{}
 
-\addbibresource{~/docs/est/bibliografia.bib}
-
 \begin{document}
-\onehalfspacing % espaçamento de 1,5 cm
 
 
-
-\printbibliography
 
 \end{document}

@@ -17,11 +17,19 @@ super + Return
 super + d
 	dmenu_run -l 20 -c -bw 2
 
+# clipboard manager
+ctrl + alt + h
+    clipmenu -fn "FantasqueSansMono:size=10" -l 10 -b
+
 # GRAPHICAL PROGRAMS
 # ------------------
 # browser
 ctrl + alt + i
-	brave
+	brave-browser
+
+# audio control
+ctrl + alt + s
+    pavucontrol
 
 # TERMINAL PROGRAMS
 # -----------------
@@ -35,11 +43,11 @@ ctrl + alt + e
 
 # calcurse
 ctrl + alt + c
-	$TERMINAL -e calcurse
+	$TERMINAL -e calcurse -D ~/.config/calcurse
 
 # Music (ncmpcpp)
 ctrl + alt + m
-	$TERMINAL -t "ncmpcpp" -e ncmpcpp
+	$TERMINAL -t "cmus" -e cmus
 
 ctrl + alt + n
 	$TERMINAL -e newsboat; pkill -RTMIN+6 dwmblocks
@@ -48,11 +56,11 @@ ctrl + alt + n
 # -------
 # config files
 ctrl + shift + i
-	dmenu-configs
+	dmenucfg
 
 # document finder
 ctrl + shift + p
-	finder
+	dmenufinder
 
 # lockscreen
 ctrl + alt + l
@@ -79,9 +87,10 @@ super + Escape
 # ====================== #
 
 XF86MonBrightnessUp
-	brightnessControl up
+	sudo brightnessctl s 5%+; kill -46 $(pidof dwmblocks)
+
 XF86MonBrightnessDown
-	brightnessControl down
+	sudo brightnessctl s 5%-; kill -46 $(pidof dwmblocks)
 
 XF86AudioRaiseVolume
 	pamixer --allow-boost -i 5; kill -44 $(pidof dwmblocks)
@@ -93,18 +102,18 @@ XF86AudioMute
 	pamixer -t; kill -44 $(pidof dwmblocks)
 
 XF86AudioPlay
-	mpc toggle
+	mpc toggle & cmus-remote -u
 XF86AudioStop
-	mpc stop
+	mpc stop & cmus-remote -s
 XF86AudioNext
-	mpc next
+	mpc next & cmus-remote -n
 XF86AudioPrev
-	mpc prev
+	mpc prev & cmus-remote -r
  
 super + less
-	mpc seek -10
+	mpc seek -10 & cmus-remote -k -10
 super + greater
-	mpc seek +10
+	mpc seek +10 & cmus-remote -k +10
 
 # ====================================== #
 # MEDIA CONTROL WITHOUT MEDIA KEYS ===== #
@@ -123,25 +132,25 @@ super + KP_Divide
 	mictoggle; kill -45 $(pidof dwmblocks)
 
 super + Right
-	mpc next
+	mpc next & cmus-remote -n
 super + Left
-	mpc prev
+	mpc prev & cmus-remote -r
 super + Down
-	mpc toggle
+	mpc toggle & cmus-remote -u
 super + Up
-	mpc toggle
+	mpc toggle & cmus-remote -u
 
 super + KP_Insert
-	brightnessControl down
+	sudo brightnessctl s 5%-; kill -46 $(pidof dwmblocks)
 super + KP_Delete
-	brightnessControl up
+	sudo brightnessctl s 5%+; kill -46 $(pidof dwmblocks)
 
 # screenshots
 Print
-	scrot '%Y-%m-%d_%T.png' -e 'mv $f ~/imagens/screenshots' && notify-send "Captura de tela salva em ~/imagens/screenshots"
+	scrot '%Y-%m-%d_%T.png' -e 'mv $f ~/Pictures/screenshots' && notify-send "Captura de tela salva em ~/Pictures/screenshots"
 
 shift + @Print
-	scrot -s '%Y-%m-%d_%T.png' -e 'mv $f ~/imagens/screenshots' && notify-send "Captura de tela salva em ~/imagens/screenshots"
+	scrot -s '%Y-%m-%d_%T.png' -e 'mv $f ~/Pictures/screenshots' && notify-send "Captura de tela salva em ~/Pictures/screenshots"
 
 super + F3
 	pamixer --allow-boost -d 5; kill -44 $(pidof dwmblocks)

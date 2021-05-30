@@ -1,7 +1,8 @@
 ---
 output:
     pdf_document
-fontsize: 12pt
+fontsize: 11pt
+fontfamily: palatino
 geometry: "left=3cm,right=3cm,top=2cm,bottom=2cm"
 title:
     "++"

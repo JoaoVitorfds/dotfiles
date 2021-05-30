@@ -1,11 +1,19 @@
 " Leader = space
 let mapleader = " "
 
-" Ctrl-Backspace deleta a palavra inteira
-inoremap <C-h> <C-\><C-o>db
-
 " Highlighting
 syntax on
+
+" Autocompletion
+" ==============
+" Permite usar o autocomplete com um dicionário
+set complete+=kspell
+" Mostra o menu de autocomplete mesmo quando há apenas 1 match
+set completeopt=menuone,longest
+" Não mostra o número de matches
+set shortmess+=c
+" Seleciona um item com o Tab
+inoremap <expr> <Tab> pumvisible() ? "<C-y>" : "<Tab>"
 
 " Número de linhas abaixo do cursor
 set scrolloff=10
@@ -22,17 +30,18 @@ set clipboard+=unnamedplus
 
 " Ctrl+q substitui :q!
 map <C-q> :quit!<CR>
-"nmap q :quit!<CR>
 
 " limpa a busca
 nnoremap <F3> :noh<CR>
 
 " Buffers
 " ==========
-nnoremap gb :ls<CR>:b<Space>
+"nnoremap gb :ls<CR>:b<Space>
 set wildcharm=<C-z>
 set wildmode=list:full
 set wildignorecase
+set hidden
+nnoremap <leader>bd :bd<CR>
 nnoremap <leader>lb :buffer! <C-z><S-Tab>
 nnoremap <leader>vb :vert sbuffer! <C-z><S-Tab>
 nnoremap <leader>sb :sbuffer! <C-z><S-Tab>
@@ -70,7 +79,7 @@ noremap <leader>9 9gt
 map <c-n> <c-w><
 map <c-m> <c-w>>
 
-" Função de substituição
+" Função de substituição em todo o documento
 nnoremap <leader>S :%s//gI<Left><Left><Left>
 
 " Vai até o próximo match da seleção e o altera
@@ -79,14 +88,14 @@ nnoremap <leader><Tab> ncgn
 " Lista de Plugins
 " ==========
 call plug#begin('~/.local/share/nvim/plugged')
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'itchyny/lightline.vim'
-Plug 'lervag/vimtex'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'unblevable/quick-scope'
 Plug 'dbmrq/vim-ditto'
-Plug 'ap/vim-css-color'
+Plug 'vim-scripts/AutoComplPop'
 call plug#end()
 
 set mouse=a
@@ -111,17 +120,6 @@ colorscheme gruvbox
 "exmode - gq instead of Q
 map Q gq
 
-" Lightline
-" ====================
-" theme
-let g:lightline = {
-      \ 'colorscheme': 'simpleblack',
-      \ }
-" Always show statusline
-set laststatus=2
-" Uncomment to prevent non-normal modes showing in powerline and below powerline.
-set noshowmode
-
 " spellcheck
 map <leader>o :setlocal spell! spelllang=pt<CR>
 
@@ -134,8 +132,22 @@ map <leader>o :setlocal spell! spelllang=pt<CR>
 " Runs a script that cleans out tex build files whenever I close out of a .tex file.
 	autocmd VimLeave *.tex !texclear %
 
-" visualizador do mdf compilado em pdf
-let g:md_pdf_viewer="zathura"
+" Fzf
+
+nnoremap <leader>f :Files ~<CR>
+nnoremap gb :Buffers<CR>
+
+" Netrw
+let g:netrw_liststyle = 3
+let g:netrw_banner = 0
+let g:netrw_browse_split = 0
+let g:netrw_winsize = 20
+autocmd FileType netrw setl bufhidden=delete
+map <leader>e :Explore<CR>
+"augroup ProjectDrawer
+"  autocmd!
+"  autocmd VimEnter * :Vexplore
+"augroup END
 
 " Goyo
 " ======================
@@ -163,6 +175,18 @@ endfunction
 autocmd! User GoyoEnter call <SID>goyo_enter()
 autocmd! User GoyoLeave call <SID>goyo_leave()
 
+" lightline
+" =========
+
+" theme
+let g:lightline = {
+      \ 'colorscheme': 'simpleblack',
+      \ }
+" Always show statusline
+set laststatus=2
+" Uncomment to prevent non-normal modes showing in powerline and below powerline.
+set noshowmode
+
 " Limelight
 " ==========
 
@@ -177,24 +201,7 @@ let g:limelight_conceal_ctermfg = 240
 let g:limelight_conceal_guifg = 'DarkGray'
 let g:limelight_conceal_guifg = '#777777'
 
-" Deoplete
-" ======================
-let g:deoplete#enable_at_startup = 1
-
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-
-" Vimtex completion
-call deoplete#custom#var('omni', 'input_patterns', {
-      \ 'tex': g:vimtex#re#deoplete
-      \})
-
-" Autocompletar
-"set wildmode=longest,list,full
-
-"Define o zathura como visualizador do vim-tex
 let g:tex_flavor = "latex"
-let g:vimtex_view_general_viewer = 'zathura'
 
 " vim-ditto
 nmap <leader>di <Plug>ToggleDitto      " Turn Ditto on and off
@@ -228,11 +235,10 @@ autocmd FileType markdown nnoremap ,def :-1read $HOME/.config/nvim/snip/markdown
 
 " Latex related mappings
 " ==========
-" Usa o plugin vimtex para compilar arquivos .tex
-autocmd FileType tex nmap <buffer> <F5> <localleader>ll
-
 "autocmd FileType tex nnoremap ,def :-1read $HOME/.config/nvim/snip/latex/artigo.tex<CR>
 autocmd FileType tex nnoremap ,def :-1read $HOME/.config/nvim/snip/latex/artigo.tex<CR>
+autocmd FileType tex nnoremap ,ba :-1read /home/joao/.config/nvim/snip/latex/basico.tex<CR>
+autocmd FileType tex nnoremap ,apre :-1read /home/joao/.config/nvim/snip/latex/apresentacao.tex<CR>
 
 autocmd FileType tex nnoremap ,abnt :-1read $HOME/docs/tex/templates/mytemplates/abnt.tex<CR>
 
@@ -256,7 +262,6 @@ autocmd FileType tex inoremap ' `'<Esc>i
 autocmd FileType tex,markdown inoremap [ []<Esc>i
 autocmd FileType tex,markdown inoremap ( ()<Esc>i
 autocmd FileType tex,markdown inoremap { {}<Esc>i
-"autocmd FileType tex inoremap ,` ``
 
 "Bibliography
 autocmd Filetype bib nnoremap ,art :read $HOME/.config/nvim/snip/latex/art.bib<CR>/++<CR>cgn
