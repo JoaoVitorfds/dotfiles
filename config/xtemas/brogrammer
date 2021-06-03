@@ -1,0 +1,43 @@
+*.font: FiraMono Nerd Font Mono:pixelsize=14:antialias=true:autohint=true
+
+! ---------------------- !
+! ----- BROGRAMMER ----- !
+! ---------------------- !
+
+*.foreground:  #d6dbe5
+*.background:  #000000
+*.color0:      #1f1f1f
+*.color8:      #d6dbe5
+*.color1:      #f81118
+*.color9:      #de352e
+*.color2:      #2dc55e
+*.color10:     #1dd361
+*.color3:      #ecba0f
+*.color11:     #f3bd09
+*.color4:      #2a84d2
+*.color12:     #1081d6
+*.color5:      #4e5ab7
+*.color13:     #5350b9
+*.color6:      #1081d6
+*.color14:     #0f7ddb
+*.color7:      #d6dbe5
+*.color15:     #ffffff
+*.colorBD:     #d6dbe5
+
+*.dwm.normbordercolor: #444444
+*.dwm.normbgcolor: #131313
+*.dwm.normfgcolor: #d6dbe5
+*.dwm.selbordercolor: #2a84d2
+*.dwm.selbgcolor: #2a84d2
+*.dwm.selfgcolor: #131313
+
+*.dmenu.font: FantasqueSansMono:size=12
+*.dmenu.background: #131313
+*.dmenu.foreground: #d6dbe5
+*.dmenu.selbackground: #2a84d2
+*.dmenu.selforeground: #131313
+
+!SXIV
+Sxiv.font: FantasqueSansMono:size=12
+Sxiv.foreground: #2a84d2
+Sxiv.background: #131313
