@@ -15,7 +15,7 @@ super + Return
 
 # program launcher
 super + d
-	dmenu_run -l 20 -c -bw 2
+	dmenu_run -i
 
 # clipboard manager
 ctrl + alt + h
@@ -36,10 +36,6 @@ ctrl + alt + s
 # file manager
 ctrl + alt + f
 	$TERMINAL -e lf
-
-# mail
-ctrl + alt + e
-	$TERMINAL -e neomutt
 
 # calcurse
 ctrl + alt + c
@@ -69,14 +65,6 @@ ctrl + alt + l
 # recording
 ctrl + alt + r
 	dmenurecord
-
-# kill compton
-ctrl + alt + c; k
-	killall compton && notify-send 'Compton - OFF'
-
-# start compton
-ctrl + alt + c; s
-	compton -b --config ~/.config/compton/compton.conf && notify-send 'Compton - ON'
 
 # make sxhkd reload its configuration files:
 super + Escape
@@ -131,6 +119,9 @@ super + KP_Add
 super + KP_Divide
 	mictoggle; kill -45 $(pidof dwmblocks)
 
+super + End
+	mictoggle; kill -45 $(pidof dwmblocks)
+
 super + Right
 	mpc next & cmus-remote -n
 super + Left
@@ -147,10 +138,10 @@ super + KP_Delete
 
 # screenshots
 Print
-	scrot '%Y-%m-%d_%T.png' -e 'mv $f ~/Pictures/screenshots' && notify-send "Captura de tela salva em ~/Pictures/screenshots"
+	scrot '%Y-%m-%d_%T.png' -e 'mv $f ~/pictures/screenshots' && notify-send "~/pictures/screenshots"
 
 shift + @Print
-	scrot -s '%Y-%m-%d_%T.png' -e 'mv $f ~/Pictures/screenshots' && notify-send "Captura de tela salva em ~/Pictures/screenshots"
+	scrot -s '%Y-%m-%d_%T.png' -e 'mv $f ~/pictures/screenshots' && notify-send "Captura de tela salva em ~/pictures/screenshots"
 
 super + F3
 	pamixer --allow-boost -d 5; kill -44 $(pidof dwmblocks)

@@ -1,12 +1,24 @@
+q
+set continue=true
+set continue=
+set continue_album=true
+set aaa_mode=album
+set continue_album=false
+set continue=false
+set aaa_mode=2
+set aaa_mode=1
+set aaa_mode=0
+set aaa_mode=none
+set aaa_mode=false
+set aaa_mode=song
+set stop_after_queue=true
 help
 set output_plugin=pulse
 :set output_plugin=pulse
-set aaa_mode=album
 set aaa_mode=all
 w
 set play_library=false
 set play_sorted=false
-set continue=true
 set status_display_program=cmus-status-display
 set status_display_program
 set status_display_program=cmd-status-display

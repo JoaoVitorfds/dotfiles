@@ -37,7 +37,8 @@ case "$ext" in
 		elif [ -x "$(command -v groffdown)" ]; then
 			groffdown -i "$file" | groff > "$base.pdf"
 		else
-			pandoc "$file" --pdf-engine=xelatex -o "$base".pdf
+			#pandoc "$file" --pdf-engine=xelatex -o "$base".pdf
+			pandoc --number-sections "$file" --pdf-engine=xelatex -o "$base".pdf
 		fi ; ;;
 	mom) preconv "$file" | refer -PS -e | groff -mom -kept -T pdf > "$base".pdf ;;
 	ms) preconv "$file" | refer -PS -e | groff -me -ms -kept -T pdf > "$base".pdf ;;

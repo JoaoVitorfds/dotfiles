@@ -24,6 +24,14 @@ autocmd BufEnter * silent! lcd %:p:h
 " Cursor no centro da tela quando se usa j ou k
 nnoremap j jzz
 nnoremap k kzz
+" Cursor no centro da tela sempre
+function! CentreCursor()
+    let pos = getpos(".")
+    normal! zz
+    call setpos(".", pos)
+endfunction
+
+autocmd CursorMoved,CursorMovedI * call CentreCursor()
 
 " Usa a seleção do sistema
 set clipboard+=unnamedplus
@@ -58,10 +66,20 @@ set tabstop=4                   " One tab == four spaces.
 " Splits
 " ==========
 set splitbelow splitright
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
+map <leader>wh <C-w>h
+map <leader>wj <C-w>j
+map <leader>wk <C-w>k
+map <leader>wl <C-w>l
+" Closing splits
+map <leader>wc <C-w>q
+" Make adjusing split sizes a bit more friendly
+noremap <silent> <C-Left> :vertical resize +3<CR>
+noremap <silent> <C-Right> :vertical resize -3<CR>
+noremap <silent> <C-Up> :resize +3<CR>
+noremap <silent> <C-Down> :resize -3<CR>
+" Change 2 split windows from vert to horiz or horiz to vert
+map <Leader>th <C-w>t<C-w>H
+map <Leader>tk <C-w>t<C-w>K
 
 " Abas
 " ==========
@@ -85,6 +103,7 @@ nnoremap <leader>S :%s//gI<Left><Left><Left>
 " Vai até o próximo match da seleção e o altera
 nnoremap <leader><Tab> ncgn
 
+
 " Lista de Plugins
 " ==========
 call plug#begin('~/.local/share/nvim/plugged')
@@ -93,10 +112,12 @@ Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/vim-easy-align'
 Plug 'unblevable/quick-scope'
 Plug 'dbmrq/vim-ditto'
-Plug 'vim-scripts/AutoComplPop'
+Plug 'gdetrez/vim-gf'
 call plug#end()
+
 
 set mouse=a
 set title
@@ -107,7 +128,7 @@ set spelllang=pt
 augroup my-colors
   autocmd!
   autocmd ColorScheme * hi Normal guibg=NONE ctermbg=NONE
-  autocmd ColorScheme * hi NormalNC guibg=#303536 ctermbg=grey
+  "autocmd ColorScheme * hi NormalNC guibg=#303536 ctermbg=grey
   autocmd ColorScheme * hi clear SpellBad
   autocmd ColorScheme * hi SpellBad guibg=#ff2929 ctermbg=224
   autocmd Colorscheme * hi clear LineNr
@@ -115,7 +136,7 @@ augroup my-colors
 augroup END
 
 set termguicolors
-colorscheme gruvbox
+colorscheme dracula
 
 "exmode - gq instead of Q
 map Q gq
@@ -133,9 +154,16 @@ map <leader>o :setlocal spell! spelllang=pt<CR>
 	autocmd VimLeave *.tex !texclear %
 
 " Fzf
-
 nnoremap <leader>f :Files ~<CR>
-nnoremap gb :Buffers<CR>
+nnoremap <leader>bb :Buffers<CR>
+
+" Vim-Easy-Align
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+" Align GitHub-flavored Markdown tables
+vmap <Leader><Bar> :EasyAlign*<Bar><Enter>
 
 " Netrw
 let g:netrw_liststyle = 3
@@ -231,7 +259,7 @@ autocmd FileType python inoremap { {}<Esc>i
 
 " Markdown related mappings
 " =========
-autocmd FileType markdown nnoremap ,def :-1read $HOME/.config/nvim/snip/markdown/pre<CR>/++<CR>cgn
+autocmd FileType markdown,rmd nnoremap ,def :-1read $HOME/.config/nvim/snip/markdown/pre<CR>/++<CR>cgn
 
 " Latex related mappings
 " ==========
@@ -242,26 +270,29 @@ autocmd FileType tex nnoremap ,apre :-1read /home/joao/.config/nvim/snip/latex/a
 
 autocmd FileType tex nnoremap ,abnt :-1read $HOME/docs/tex/templates/mytemplates/abnt.tex<CR>
 
-autocmd FileType tex,markdown inoremap ,st \section{}<Esc>i
-autocmd FileType tex,markdown inoremap ,sst \subsection{}<Esc>i
-autocmd FileType tex,markdown inoremap ,ssst \subsubsection{}<Esc>i
-autocmd FileType tex,markdown inoremap ,lsi \begin{itemize}<CR>\end{itemize}<Esc>kA<CR>\item 
-autocmd FileType tex,markdown inoremap ,lse \begin{enumerate}<CR>\end{enumerate}<Esc>kA<CR>\item 
-autocmd Filetype tex,markdown inoremap ,dc \documentclass[]{}<Esc>i
-autocmd Filetype tex,markdown inoremap ,usp \usepackage{}<Esc>i
-autocmd Filetype tex,markdown inoremap ,bd \begin{document}<CR><CR>\end{document}<Esc>kA
-autocmd Filetype tex,markdown inoremap ,bg \begin{}<CR>\end{}<Esc>k$i
-autocmd Filetype tex,markdown inoremap ,neg \textbf{}<Esc>i
-autocmd Filetype tex,markdown inoremap ,ita \textit{}<Esc>i
-autocmd Filetype tex,markdown inoremap ,fn \footnote{}<Esc>i
-autocmd Filetype tex,markdown inoremap ,sub \textsubscript{}<Esc>i
-autocmd Filetype tex,markdown inoremap ,sup \textsuperscript{}<Esc>i
-autocmd Filetype tex,markdown inoremap ,nd $\emptyset$
+autocmd FileType tex,markdown,rmd inoremap ,st \section{}<Esc>i
+autocmd FileType tex,markdown,rmd inoremap ,sst \subsection{}<Esc>i
+autocmd FileType tex,markdown,rmd inoremap ,ssst \subsubsection{}<Esc>i
+autocmd FileType tex,markdown,rmd inoremap ,lsi \begin{itemize}<CR>\end{itemize}<Esc>kA<CR>\item 
+autocmd FileType tex,markdown,rmd inoremap ,lse \begin{enumerate}<CR>\end{enumerate}<Esc>kA<CR>\item 
+autocmd Filetype tex,markdown,rmd inoremap ,dc \documentclass[]{}<Esc>i
+autocmd Filetype tex,markdown,rmd inoremap ,usp \usepackage{}<Esc>i
+autocmd Filetype tex,markdown,rmd inoremap ,bd \begin{document}<CR><CR>\end{document}<Esc>kA
+autocmd Filetype tex,markdown,rmd inoremap ,bg \begin{}<CR>\end{}<Esc>k$i
+autocmd Filetype tex,markdown,rmd inoremap ,fr \begin{frame}<CR>\frametitle{}<CR>\end{frame}<Esc>O\begin{minipage}{0.95\textwidth}<CR>\end{minipage}<CR>\begin{minipage}{0.4\textwidth}<CR>\end{minipage}<Esc>4ki
+autocmd Filetype tex,markdown,rmd inoremap ,neg \textbf{}<Esc>i
+autocmd Filetype tex,markdown,rmd inoremap ,ita \textit{}<Esc>i
+autocmd Filetype tex,markdown,rmd inoremap ,fn \footnote{}<Esc>i
+autocmd Filetype tex,markdown,rmd inoremap ,sub \textsubscript{}<Esc>i
+autocmd Filetype tex,markdown,rmd inoremap ,sup \textsuperscript{}<Esc>i
+autocmd Filetype tex,markdown,rmd inoremap ,nd $\emptyset$
+autocmd Filetype tex,markdown,rmd inoremap ,ex \begin{exe}<CR>\end{exe}<Esc>O\ex 
+autocmd Filetype tex,markdown,rmd inoremap ,sn \begin{exe}<CR>\end{exe}<Esc>O\sn 
 autocmd FileType tex inoremap " ``''<Esc>hi
 autocmd FileType tex inoremap ' `'<Esc>i
-autocmd FileType tex,markdown inoremap [ []<Esc>i
-autocmd FileType tex,markdown inoremap ( ()<Esc>i
-autocmd FileType tex,markdown inoremap { {}<Esc>i
+autocmd FileType tex,markdown,rmd inoremap [ []<Esc>i
+autocmd FileType tex,markdown,rmd inoremap ( ()<Esc>i
+autocmd FileType tex,markdown,rmd inoremap { {}<Esc>i
 
 "Bibliography
 autocmd Filetype bib nnoremap ,art :read $HOME/.config/nvim/snip/latex/art.bib<CR>/++<CR>cgn

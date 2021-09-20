@@ -2,22 +2,18 @@
 # This file runs when a DM logs you into a graphical session.
 # If you use startx/xinit like a Chad, this file will also be sourced.
 
+xrandr --output VGA-1 1366x768
+
 # Fix Gnome Apps Slow  Start due to failing services
 # Add this when you include flatpak in your system
 dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
 
-clipit &
-sxhkd &
+clipmenud &
 remaps &
-# sh $HOME/.config/polybar/launch.sh
+sxhkd &
 xclip &
-# clipit &
-unclutter &
-mpd && mpdup &			# music player daemon-you might prefer it as a service though
 picom &
 dunst &			# dunst for notifications
-redshift &
-#xsetroot -name $(dwmbar) &
 dwmblocks &
 
 # disable screensaving
@@ -28,8 +24,7 @@ xset s off &
 
 xrdb merge $HOME/.config/Xresources
 
-# enable touchpad tapping to click
-# xinput set-prop 11 301 1
+emacs --daemon &
 
 # wallpaper
 nitrogen --restore &

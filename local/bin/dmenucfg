@@ -8,22 +8,16 @@
 # Dmenu script for editing some of my more frequently edited config files.
 
 
-declare options=("alacritty
-bash
-bspwm
-dunst
+declare options=("dunst
 dwm
 dwmblocks
-kitty
 neovim
+lf
 picom
-polybar
-qutebrowser
-spectrwm
 st
 sxhkd
-termite
-zsh
+zshrc
+zshenv
 quit")
 
 choice=$(echo -e "${options[@]}" | dmenu -b -i -p 'Escolha o arquivo a ser editado: ')
@@ -31,15 +25,6 @@ choice=$(echo -e "${options[@]}" | dmenu -b -i -p 'Escolha o arquivo a ser edita
 case "$choice" in
 	quit)
 		echo "Program terminated." && exit 1
-	;;
-	alacritty)
-		choice="$HOME/.config/alacritty/alacritty.yml"
-	;;
-	bash)
-		choice="$HOME/.bashrc"
-	;;
-	bspwm)
-		choice="$HOME/.config/bspwm/bspwmrc"
 	;;
 	dunst)
 		choice="$HOME/.config/dunst/dunstrc"
@@ -50,23 +35,14 @@ case "$choice" in
 	dwmblocks)
 		choice="$HOME/programs/dwmblocks/config.h"
 	;;
-	kitty)
-		choice="$HOME/.config/kitty/kitty.conf"
-	;;
+    lf)
+        choice="$HOME/.config/lf/lfrc"
+    ;;
 	neovim)
 		choice="$HOME/.config/nvim/init.vim"
 	;;
 	picom)
 		choice="$HOME/.config/picom/picom.conf"
-	;;
-	polybar)
-		choice="$HOME/.config/polybar/config"
-	;;
-	qutebrowser)
-		choice="$HOME/.config/qutebrowser/autoconfig.yml"
-	;;
-	spectrwm)
-		choice="$HOME/.spectrwm.conf"
 	;;
 	sxhkd)
 		choice="$HOME/.config/sxhkd/sxhkdrc"
@@ -74,12 +50,12 @@ case "$choice" in
 	st)
 		choice="$HOME/programs/st/config.h"
 	;;
-	termite)
-		choice="$HOME/.config/termite/config"
+	zshenv)
+		choice="$HOME/.zshenv"
 	;;
-	zsh)
-		choice="$HOME/.zshrc"
-	;;
+    zshrc)
+        choice="$HOME/.config/zsh/.zshrc"
+    ;;
 	*)
 		exit 1
 	;;

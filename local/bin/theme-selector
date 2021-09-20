@@ -1,9 +1,0 @@
-#!/bin/bash
-
-choice=$(ls /home/joao/.config/xtemas/ | dmenu -b -l 10 )
-
-cp /home/joao/.config/xtemas/$choice /home/joao/.config/Xresources
-
-sed -i 's/^colorscheme .*$/colorscheme '"$choice"'/g' /home/joao/.config/nvim/init.vim 
-
-xrdb /home/joao/.config/Xresources

@@ -1,9 +1,13 @@
 ---
 output:
-    pdf_document
-fontsize: 11pt
-fontfamily: palatino
+    pdf_document:
+        latex_engine: xelatex
+fontsize: 12pt
 geometry: "left=3cm,right=3cm,top=2cm,bottom=2cm"
 title:
     "++"
+header-includes:
+    - \usepackage[brazil]{babel}
+    - \usepackage{fontspec}
+    - \setmainfont{TeX Gyre Pagella}
 ---

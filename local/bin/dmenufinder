@@ -14,7 +14,8 @@ case "$choice" in
 		echo "Program terminated." && exit 1
 	;;
 	pdf)
-		find ~/docs -name "*.pdf" | dmenu -b -l 10 -i -p 'Escolha um arquivo: ' | xargs -I {} zathura "{}"
+		#find ~/docs -name "*.pdf" | dmenu -b -l 10 -i -p 'Escolha um arquivo: ' | xargs -I {} zathura "{}"
+		find ~/docs type f -name "*.pdf" -o -name "*djvu" | dmenu -b -l 10 -i -p 'Escolha um arquivo: ' | xargs -I {} zathura "{}"
 	;;
 	djvu)
 		find ~/docs -name "*.djvu" | dmenu -b -l 10 -i -p 'Escolha um arquivo: ' | xargs -I {} tabbed -c zathura "{}" -e
@@ -23,15 +24,19 @@ case "$choice" in
 		find ~/docs -name "*.epub" | dmenu -b -l 10 -i -p 'Escolha um arquivo: ' | xargs -I {} tabbed -c zathura "{}" -e
 	;;
 	tex)
-		#var="$(find /media/w10shrd -name "*.tex" | dmenu -b -l 10 -fn "FantasqueSansMono" -nb "#282a36" -sb "#bd93f9" -p 'Escolha um arquivo: ')"
-		#$TERMINAL -e nvim $var
 		find ~/docs -name "*.tex" | dmenu -b -l 10 -i  -p 'Escolha um arquivo: ' | xargs -I {} $TERMINAL -e nvim {}
+		#find ~/docs -name "*.tex" | dmenu -b -l 10 -i  -p 'Escolha um arquivo: ' | xargs -I {} emacsclient -c -a emacs {}
 	;;
 	md)
-		find ~/docs -name "*.md" | dmenu -b -l 10 -i -p 'Escolha um arquivo: ' | xargs -I {} $TERMINAL -e nvim {}
+		#find ~/docs type f -name "*.md" -o -name "*.[Rr]md" | dmenu -b -l 10 -i  -p 'Escolha um arquivo: ' | xargs -I {} emacsclient -c -a emacs {}
+		find ~/docs type f -name "*.md" -o -name "*.[Rr]md" | dmenu -b -l 10 -i  -p 'Escolha um arquivo: ' | xargs -I {} $TERMINAL -e nvim {}
+	;;
+	org)
+		find ~/docs -name "*.org" | dmenu -b -l 10 -i -p 'Escolha um arquivo' | xargs -I {} emacsclient -c -a emacs {}
 	;;
 	doc/odt)
-		find ~/docs -name "*.docx" -o -name "*.doc" -o -name "*.odt" | dmenu -b -l 10 -i -p 'Escolha um arquivo: ' | xargs -I {} $TERMINAL -e lowriter {}
+		#find ~/docs -name "*.docx" -o -name "*.doc" -o -name "*.odt" | dmenu -b -l 10 -i -p 'Escolha um arquivo: ' | setsid -f xargs -I {} $TERMINAL -e lowriter {}
+		find ~/docs -name "*.docx" -o -name "*.doc" -o -name "*.odt" | dmenu -b -l 10 -i -p 'Escolha um arquivo: ' | xargs -I {} lowriter {}
 	;;
 	*)
 		exit 1

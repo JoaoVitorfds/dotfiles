@@ -24,7 +24,7 @@ cmd open ${{
 	image/*) setsid -f sxiv $f 2>/dev/null ;;
 	audio/*) setsid -f mpv --audio-display=attachment --force-window $f >/dev/null 2>&1;;
 	video/*) setsid -f mpv $f -quiet >/dev/null 2>&1 ;;
-	application/pdf|application/vnd*|application/epub*) setsid -f zathura $fx >/dev/null 2>&1 ;;
+	application/pdf|application/vnd*) setsid -f zathura $fx >/dev/null 2>&1 ;;
 	application/vnd.openxmlformats-officedocument.wordprocessingml.document*) setsid -f lowriter $fx >/dev/null 2>&1 ;;
 	application/vnd.oasis.opendocument.spreadsheet*) setsid -f localc $fx >/dev/null 2>&1 ;;
         *) for f in $fx; do setsid -f $OPENER $f >/dev/null 2>&1; done;;
@@ -42,27 +42,31 @@ cmd delete ${{
 	[ $ans = "y" ] && rm -rf $fx
 }}
 
-# cmd moveto ${{
-# 	clear; tput cup $(($(tput lines)/3)); tput bold
-# 	set -f
-# 	clear; echo "Move to where?"
-# 	dest="$(cut -d'	' -f2- ${XDG_CONFIG_HOME:-$HOME/.config}/directories | fzf | sed 's|~|$HOME|' )" &&
-# 	for x in $fx; do
-# 		eval mv -iv \"$x\" \"$dest\"
-# 	done &&
-# 	notify-send "🚚 File(s) moved." "File(s) moved to $dest."
-# }}
-# 
-# cmd copyto ${{
-# 	clear; tput cup $(($(tput lines)/3)); tput bold
-# 	set -f
-# 	clear; echo "Copy to where?"
-# 	dest="$(cut -d'	' -f2- ${XDG_CONFIG_HOME:-$HOME/.config}/directories | fzf | sed 's|~|$HOME|' )" &&
-# 	for x in $fx; do
-# 		eval cp -ivr \"$x\" \"$dest\"
-# 	done &&
-# 	notify-send "📋 File(s) copied." "File(s) copies to $dest."
-# }}
+# Trash cli bindings
+cmd trash ${{
+  files=$(printf "$fx" | tr '\n' ';')
+  while [ "$files" ]; do
+    # extract the substring from start of string up to delimiter.
+    # this is the first "element" of the string.
+    file=${files%%;*}
+
+    trash-put "$(basename "$file")"
+    # if there's only one element left, set `files` to an empty string.
+    # this causes us to exit this `while` loop.
+    # else, we delete the first "element" of the string from files, and move onto the next.
+    if [ "$files" = "$file" ]; then
+      files=''
+    else
+      files="${files#*;}"
+    fi
+  done
+}}
+
+cmd clear_trash %trash-empty
+
+cmd restore_trash ${{
+  trash-restore
+}}
 
 # Archive bindings
 cmd unarchive ${{
@@ -123,47 +127,52 @@ map zg targz
 map zb targz
 map zu unarchive
 
+# Trash Mappings
+map dd trash
+map tc clear_trash
+map tr restore_trash
+
 # Movement
 
 map gh cd /home/joao
 map gtr cd ~/.local/share/Trash/files
 
-map gv. cd ~/Videos
+map gv. cd ~/videos
 
-map gm. cd ~/Music
+map gm. cd ~/music
 
-map gi. cd ~/Pictures
-map gis cd ~/Pictures/screenshots
-map giw cd ~/Pictures/wallpapers
+map gi. cd ~/pictures
+map gis cd ~/pictures/screenshots
+map giw cd ~/pictures/wallpapers
 
-map ge cd ~/Documents/est
-map gl. cd ~/Documents/est/ling
-map glc cd ~/Documents/est/ling/lc
-map glpy cd ~/Documents/est/ling/lc/ptn
-map gle cd ~/Documents/est/ling/estruturalismo
-map glg cd ~/Documents/est/ling/gerativismo
-map glso cd ~/Documents/est/ling/semiotica
-map glsa cd ~/Documents/est/ling/semantica
-map gL. cd ~/Documents/est/lit
-map gLa cd ~/Documents/est/lit/africana
-map gLb cd ~/Documents/est/lit/brasileira
-map gLp cd ~/Documents/est/lit/portuguesa
-map glog cd ~/Documents/est/fil/logica
-map gufc cd ~/Documents/est/ufc
-map g202 cd ~/Documents/est/ufc/202/
-map g211 cd ~/Documents/est/ufc/211/
+map ge cd ~/docs/est
+map gl. cd ~/docs/est/ling
+map glc cd ~/docs/est/ling/lc
+map glpy cd ~/docs/est/ling/lc/ptn
+map gle cd ~/docs/est/ling/estruturalismo
+map glg cd ~/docs/est/ling/gerativismo
+map glso cd ~/docs/est/ling/semiotica
+map glsa cd ~/docs/est/ling/semantica
+map gL. cd ~/docs/est/lit
+map gLa cd ~/docs/est/lit/africana
+map gLb cd ~/docs/est/lit/brasileira
+map gLp cd ~/docs/est/lit/portuguesa
+map glog cd ~/docs/est/fil/logica
+map gufc cd ~/docs/est/ufc
+map g202 cd ~/docs/est/ufc/202/
+map g211 cd ~/docs/est/ufc/211/
 
-map gal cd ~/Documents/all/
+map gal cd ~/docs/all/
 
-map gtx cd ~/Documents/tex/
+map gtx cd ~/docs/tex/
 
-map gd cd ~/Documents
+map gd cd ~/docs
 
-map gD cd ~/Documents/downloads
+map gD cd ~/docs/downloads
 
-map gpy cd ~/Documents/est/prog/python
+map gpy cd ~/docs/est/prog/python
 
-map gmo cd ~/Documents/est/ufc/monitoria
+map gmo cd ~/docs/est/ufc/monitoria-pid/
 
 map gC cd ~/.config
 map gE cd /etc

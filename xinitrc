@@ -2,15 +2,23 @@
 
 # xinitrc runs automatically when you run startx.
 
+systemctl --user import-environment DISPLAY
+
 # There are some small but important commands that need to be run when we start
 # the graphical environment. I keep those commands in ~/config/xprofile because
 # that file is run automatically if someone uses a display manager (login
 # screen) and so they are needed there. To prevent doubling up commands, I
 # source them here with the line below.
+. ~/.xprofile
+
+# xsession start script - stop creating error files in home directory
+USERXSESSION="$XDG_CACHE_HOME/X11/xsession"
+USERXSESSIONRC="$XDG_CACHE_HOME/X11/xsessionrc"
+ALTUSERXSESSION="$XDG_CACHE_HOME/X11/Xsession"
+ERRFILE="$XDG_CACHE_HOME/X11/xsession-errors"
 
 # export STATUSBAR="i3blocks" # Uncomment this line when using i3.
 # setxkbmap -layout br -variant thinkpad &
-. ~/.xprofile
 
 # Your default LARBS WM is determined in your `~/.profile` on login.  Here we
 # run the proper command to run when the graphical environment starts.

@@ -63,6 +63,3 @@
 
 ;; setting a keybind for olivetti
 (map! :leader :desc "Enable olivetti" "z" #'olivetti-mode)
-
-;; org-mode settings
-(setq-default org-use-sub-superscripts {})
