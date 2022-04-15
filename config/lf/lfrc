@@ -22,9 +22,11 @@ cmd open ${{
 	image/x-xcf|image/svg+xml) setsid -f gimp $f >/dev/null 2>&1 ;;
     #image/*) rotdir $f | grep -i "\.\(png\|jpg\|jpeg\|gif\|webp\|tif\|ico\)\(_large\)*$" | sxiv -aio 2>/dev/null | lf-select ;;
 	image/*) setsid -f sxiv $f 2>/dev/null ;;
-	audio/*) setsid -f mpv --audio-display=attachment --force-window $f >/dev/null 2>&1;;
+	#audio/*) setsid -f mpv --audio-display=attachment --force-window $f >/dev/null 2>&1;;
+	audio/*) setsid -f audacious $f >/dev/null 2>&1;;
 	video/*) setsid -f mpv $f -quiet >/dev/null 2>&1 ;;
-	application/pdf|application/vnd*) setsid -f zathura $fx >/dev/null 2>&1 ;;
+	application/pdf) setsid -f zathura $fx >/dev/null 2>&1 ;;
+	application/vnd*) setsid -f zathura $fx >/dev/null 2>&1 ;;
 	application/vnd.openxmlformats-officedocument.wordprocessingml.document*) setsid -f lowriter $fx >/dev/null 2>&1 ;;
 	application/vnd.oasis.opendocument.spreadsheet*) setsid -f localc $fx >/dev/null 2>&1 ;;
         *) for f in $fx; do setsid -f $OPENER $f >/dev/null 2>&1; done;;
@@ -161,6 +163,8 @@ map glog cd ~/docs/est/fil/logica
 map gufc cd ~/docs/est/ufc
 map g202 cd ~/docs/est/ufc/202/
 map g211 cd ~/docs/est/ufc/211/
+map g212 cd ~/docs/est/ufc/212/
+map g221 cd ~/docs/est/ufc/221/
 
 map gal cd ~/docs/all/
 
@@ -171,6 +175,8 @@ map gd cd ~/docs
 map gD cd ~/docs/downloads
 
 map gpy cd ~/docs/est/prog/python
+
+map gre cd ~/docs/est/rev/
 
 map gmo cd ~/docs/est/ufc/monitoria-pid/
 

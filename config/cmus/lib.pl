@@ -429,6 +429,29 @@
 /home/joao/music/Judas Priest/1990 - Painkiller/10 One Shot At Glory.mp3
 /home/joao/music/Judas Priest/1990 - Painkiller/11 Living Bad Dreams [Bonus Track].mp3
 /home/joao/music/Judas Priest/1990 - Painkiller/12 Leather Rebel (Live) [Bonus Track].mp3
+/home/joao/music/Lana Del Rey/2012 - Born To Die (The Paradise Edition)/Disc 1/01 Lana Del Rey - Born To Die.mp3
+/home/joao/music/Lana Del Rey/2012 - Born To Die (The Paradise Edition)/Disc 1/02 Lana Del Rey - Off To The Races.mp3
+/home/joao/music/Lana Del Rey/2012 - Born To Die (The Paradise Edition)/Disc 1/03 Lana Del Rey - Blue Jeans.mp3
+/home/joao/music/Lana Del Rey/2012 - Born To Die (The Paradise Edition)/Disc 1/04 Lana Del Rey - Video Games.mp3
+/home/joao/music/Lana Del Rey/2012 - Born To Die (The Paradise Edition)/Disc 1/05 Lana Del Rey - Diet Mountain Dew.mp3
+/home/joao/music/Lana Del Rey/2012 - Born To Die (The Paradise Edition)/Disc 1/06 Lana Del Rey - National Anthem.mp3
+/home/joao/music/Lana Del Rey/2012 - Born To Die (The Paradise Edition)/Disc 1/07 Lana Del Rey - Dark Paradise.mp3
+/home/joao/music/Lana Del Rey/2012 - Born To Die (The Paradise Edition)/Disc 1/08 Lana Del Rey - Radio.mp3
+/home/joao/music/Lana Del Rey/2012 - Born To Die (The Paradise Edition)/Disc 1/09 Lana Del Rey - Carmen.mp3
+/home/joao/music/Lana Del Rey/2012 - Born To Die (The Paradise Edition)/Disc 1/10 Lana Del Rey - Million Dollar Man.mp3
+/home/joao/music/Lana Del Rey/2012 - Born To Die (The Paradise Edition)/Disc 1/11 Lana Del Rey - Summertime Sadness.mp3
+/home/joao/music/Lana Del Rey/2012 - Born To Die (The Paradise Edition)/Disc 1/12 Lana Del Rey - This Is What Makes Us Girls.mp3
+/home/joao/music/Lana Del Rey/2012 - Born To Die (The Paradise Edition)/Disc 1/13 Lana Del Rey - Without You.mp3
+/home/joao/music/Lana Del Rey/2012 - Born To Die (The Paradise Edition)/Disc 1/14 Lana Del Rey - Lolita.mp3
+/home/joao/music/Lana Del Rey/2012 - Born To Die (The Paradise Edition)/Disc 1/15 Lana Del Rey - Lucky Ones.mp3
+/home/joao/music/Lana Del Rey/2012 - Born To Die (The Paradise Edition)/Disc 2/01 Lana Del Rey - Ride.mp3
+/home/joao/music/Lana Del Rey/2012 - Born To Die (The Paradise Edition)/Disc 2/02 Lana Del Rey - American.mp3
+/home/joao/music/Lana Del Rey/2012 - Born To Die (The Paradise Edition)/Disc 2/03 Lana Del Rey - Cola.mp3
+/home/joao/music/Lana Del Rey/2012 - Born To Die (The Paradise Edition)/Disc 2/04 Lana Del Rey - Body Electric.mp3
+/home/joao/music/Lana Del Rey/2012 - Born To Die (The Paradise Edition)/Disc 2/05 Lana Del Rey - Blue Velvet.mp3
+/home/joao/music/Lana Del Rey/2012 - Born To Die (The Paradise Edition)/Disc 2/06 Lana Del Rey - Gods & Monsters.mp3
+/home/joao/music/Lana Del Rey/2012 - Born To Die (The Paradise Edition)/Disc 2/07 Lana Del Rey - Yayo.mp3
+/home/joao/music/Lana Del Rey/2012 - Born To Die (The Paradise Edition)/Disc 2/08 Lana Del Rey - Bel Air.mp3
 /home/joao/music/Megadeth/1986 - Peace Sells...But Who's Buying/01. Wake Up Dead.mp3
 /home/joao/music/Megadeth/1986 - Peace Sells...But Who's Buying/02. The Conjuring.mp3
 /home/joao/music/Megadeth/1986 - Peace Sells...But Who's Buying/03. Peace Sells.mp3
@@ -497,6 +520,34 @@
 /home/joao/music/Megadeth/1994 - Youthanasia/14. New World Order (demo).mp3
 /home/joao/music/Megadeth/1994 - Youthanasia/15. Absolution.mp3
 /home/joao/music/Megadeth/1994 - Youthanasia/16. A Tout Le Monde (demo).mp3
+/home/joao/music/Soundgarden/1991 - Badmotorfinger/01 - Rusty Cage.mp3
+/home/joao/music/Soundgarden/1991 - Badmotorfinger/02 - Outshined.mp3
+/home/joao/music/Soundgarden/1991 - Badmotorfinger/03 - Slaves & Bulldozers.mp3
+/home/joao/music/Soundgarden/1991 - Badmotorfinger/04 - Jesus Christ Pose.mp3
+/home/joao/music/Soundgarden/1991 - Badmotorfinger/05 - Face Pollution.mp3
+/home/joao/music/Soundgarden/1991 - Badmotorfinger/06 - Somewhere.mp3
+/home/joao/music/Soundgarden/1991 - Badmotorfinger/07 - Searching With My Good Eye Closed.mp3
+/home/joao/music/Soundgarden/1991 - Badmotorfinger/08 - Room A Thousand Years Wide.mp3
+/home/joao/music/Soundgarden/1991 - Badmotorfinger/09 - Mind Riot.mp3
+/home/joao/music/Soundgarden/1991 - Badmotorfinger/10 - Drawing Flies.mp3
+/home/joao/music/Soundgarden/1991 - Badmotorfinger/11 - Holy Water.mp3
+/home/joao/music/Soundgarden/1991 - Badmotorfinger/12 - New Damage.mp3
+/home/joao/music/Soundgarden/1994 - Superunknown/01 - Let Me Drown.mp3
+/home/joao/music/Soundgarden/1994 - Superunknown/02 - My Wave.mp3
+/home/joao/music/Soundgarden/1994 - Superunknown/03 - Fell On Black Days.mp3
+/home/joao/music/Soundgarden/1994 - Superunknown/04 - Mailman.mp3
+/home/joao/music/Soundgarden/1994 - Superunknown/05 - Superunknown.mp3
+/home/joao/music/Soundgarden/1994 - Superunknown/06 - Head Down.mp3
+/home/joao/music/Soundgarden/1994 - Superunknown/07 - Black Hole Sun.mp3
+/home/joao/music/Soundgarden/1994 - Superunknown/08 - Spoonman.mp3
+/home/joao/music/Soundgarden/1994 - Superunknown/09 - Limo Wreck.mp3
+/home/joao/music/Soundgarden/1994 - Superunknown/10 - The Day I Tried To Live.mp3
+/home/joao/music/Soundgarden/1994 - Superunknown/11 - Kickstand.mp3
+/home/joao/music/Soundgarden/1994 - Superunknown/12 - Fresh Tendrils.mp3
+/home/joao/music/Soundgarden/1994 - Superunknown/13 - 4th Of July.mp3
+/home/joao/music/Soundgarden/1994 - Superunknown/14 - Half.mp3
+/home/joao/music/Soundgarden/1994 - Superunknown/15 - Like Suicide.mp3
+/home/joao/music/Soundgarden/1994 - Superunknown/16 - She Likes Surprises.mp3
 /home/joao/music/Testament/1987 - The Legacy/01. Over The Wall.mp3
 /home/joao/music/Testament/1987 - The Legacy/02. The Haunting.mp3
 /home/joao/music/Testament/1987 - The Legacy/03. Burnt Offerings.mp3

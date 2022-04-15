@@ -16,6 +16,7 @@ alias calcurse='calcurse -D ~/.config/calcurse'
 alias xoff='xrandr --output LVDS-1 --off'
 alias xon='xrandr --output LVDS-1 --auto --left-of VGA-1'
 alias o='xdg-open'
+alias ncal='ncal -b'
 
 conj(){
     verbo=$1
@@ -24,7 +25,12 @@ conj(){
 
 trpt(){
     word=$1
-    trans -t pt "$1"
+    trans -s en -t pt "$1"
+}
+
+trptd(){
+    word=$1
+    trans -d -s en -t pt "$1"
 }
 
 tren(){
@@ -32,27 +38,61 @@ tren(){
         trans -s pt -t en "$1"
 }
 
+trend(){
+    word=$1
+        trans -d -s pt -t en "$1"
+}
+
+trde(){
+    word=$1
+        trans -s pt -t de "$1"
+}
+
+trded(){
+    word=$1
+        trans -d -s pt -t de "$1"
+}
+
+trdep(){
+    word=$1
+        trans -s de -t pt "$1"
+}
+
+trdepd(){
+    word=$1
+        trans -d -s de -t pt "$1"
+}
+
+trdeen(){
+    word=$1
+        trans -s de -t en "$1"
+}
+
+trdeend(){
+    word=$1
+        trans -d -s de -t en "$1"
+}
+
 # movement
-alias gall='cd ~/docs/all'
 alias gl.='cd ~/docs/est/ling'
 alias glg='cd ~/docs/est/ling/gerativismo'
 alias gle='cd ~/docs/est/ling/estruturalismo'
-alias glp='cd ~/docs/est/ling/psicoling'
 alias glsa='cd ~/docs/est/ling/semantica'
 alias glso='cd ~/docs/est/ling/semiotica'
 alias glc='cd ~/docs/est/ling/lc'
 alias glpy='cd ~/docs/est/ling/lc/ptn'
 alias gpy='cd ~/docs/est/prog/python'
 alias gL.='cd ~/docs/est/lit'
-alias gLa='cd ~/docs/est/lit/africana'
-alias gLb='cd ~/docs/est/lit/brasileira'
-alias gLp='cd ~/docs/est/lit/portuguesa'
-alias glog='cd ~/docs/est/fil/logica'
 alias gufc='cd ~/docs/est/ufc'
 alias g202='cd ~/docs/est/ufc/202'
 alias g202a='cd ~/docs/est/ufc/202/202-atividades'
 alias g211='cd ~/docs/est/ufc/211'
 alias g211a='cd ~/docs/est/ufc/211/211-atividades'
+alias g212='cd ~/docs/est/ufc/212'
+alias g212a='cd ~/docs/est/ufc/212/212-atividades'
+alias g221='cd ~/docs/est/ufc/221'
+alias g221a='cd ~/docs/est/ufc/221/212-atividades'
 alias gmo='cd ~/docs/est/ufc/monitoria-pid/'
+alias grev='cd ~/docs/est/rev/'
 alias gv.='cd ~/videos'
 alias gm.='cd ~/music'

@@ -136,7 +136,7 @@ augroup my-colors
 augroup END
 
 set termguicolors
-colorscheme dracula
+colorscheme gruvbox
 
 "exmode - gq instead of Q
 map Q gq

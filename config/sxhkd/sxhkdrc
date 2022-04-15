@@ -35,7 +35,7 @@ ctrl + alt + s
 # -----------------
 # file manager
 ctrl + alt + f
-	$TERMINAL -e lf
+	$TERMINAL -e vifm ~ ~/docs
 
 # calcurse
 ctrl + alt + c
